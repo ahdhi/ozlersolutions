@@ -1,0 +1,261 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=Source+Sans+3:wght@400;500;600&display=swap');
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    @apply text-slate-700;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'DM Sans', sans-serif;
+    @apply font-bold text-oz-navy;
+  }
+  h1 { @apply text-4xl md:text-5xl lg:text-6xl tracking-tight; }
+  h2 { @apply text-3xl md:text-4xl tracking-tight; }
+  h3 { @apply text-xl md:text-2xl; }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-7 py-3 font-display text-[0.95rem] font-semibold rounded-lg border-2 border-transparent transition-all duration-400 ease-expo-out whitespace-nowrap cursor-pointer relative overflow-hidden;
+  }
+  .btn::before {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-200%] transition-transform duration-600;
+  }
+  .btn:hover::before {
+    @apply translate-x-[200%];
+  }
+  .btn-primary {
+    @apply bg-oz-blue text-white border-oz-blue hover:bg-oz-blue-light hover:border-oz-blue-light hover:shadow-[0_8px_30px_rgba(37,99,235,0.4)] hover:-translate-y-1 hover:scale-[1.02] active:scale-[0.98];
+  }
+  .btn-secondary {
+    @apply bg-transparent text-oz-blue border-oz-blue hover:bg-oz-blue hover:text-white hover:shadow-[0_4px_20px_rgba(37,99,235,0.3)] hover:-translate-y-0.5;
+  }
+  .btn-white {
+    @apply bg-white text-oz-navy border-white hover:bg-transparent hover:text-white hover:border-white hover:shadow-[0_4px_20px_rgba(255,255,255,0.4)];
+  }
+  .btn-ghost {
+    @apply bg-transparent text-slate-600 border-slate-300 hover:border-oz-blue hover:text-oz-blue hover:bg-oz-blue/5;
+  }
+  .btn-dark {
+    @apply bg-oz-navy text-white border-oz-navy hover:bg-oz-navy-light hover:shadow-[0_8px_30px_rgba(30,58,95,0.4)] hover:-translate-y-1;
+  }
+  .btn-lg {
+    @apply px-9 py-4 text-base;
+  }
+  .btn-sm {
+    @apply px-5 py-2 text-sm;
+  }
+
+  .label {
+    @apply font-display text-xs font-semibold tracking-[0.12em] uppercase text-oz-blue;
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-oz-blue via-oz-accent to-oz-teal bg-clip-text text-transparent animate-gradient-shift;
+    background-size: 200% auto;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .card-hover {
+    @apply transition-all duration-400 ease-expo-out;
+  }
+  .card-hover:hover {
+    @apply -translate-y-2 shadow-[0_20px_60px_rgba(37,99,235,0.15)];
+  }
+
+  .animate-on-scroll {
+    @apply opacity-0;
+  }
+  .animate-on-scroll.in-view {
+    @apply animate-fade-in-up;
+  }
+
+  .glow-effect {
+    @apply relative;
+  }
+  .glow-effect::after {
+    content: '';
+    @apply absolute -inset-[2px] bg-gradient-to-r from-oz-blue via-oz-accent to-oz-teal rounded-lg opacity-0 blur-xl transition-opacity duration-600;
+    z-index: -1;
+  }
+  .glow-effect:hover::after {
+    @apply opacity-30;
+  }
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: #f8fafc; }
+::-webkit-scrollbar-thumb { 
+  background: linear-gradient(180deg, #2563eb, #14b8a6); 
+  border-radius: 5px; 
+}
+::-webkit-scrollbar-thumb:hover { 
+  background: linear-gradient(180deg, #1d4ed8, #0d9488); 
+}
+
+/* Smooth scroll reveal */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-on-scroll {
+  animation: reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Gradient background animation */
+@keyframes gradientFlow {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-flow {
+  background-size: 200% 200%;
+  animation: gradientFlow 15s ease infinite;
+}
+
+/* Icon float animation */
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(5deg);
+  }
+}
+
+.icon-float {
+  animation: iconFloat 3s ease-in-out infinite;
+}
+/* Enhanced scroll animations */
+@keyframes scrollPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(37, 99, 235, 0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes glassEffect {
+  0% {
+    backdrop-filter: blur(0px);
+  }
+  100% {
+    backdrop-filter: blur(10px);
+  }
+}
+
+.scroll-pulse {
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+.slide-in-right {
+  animation: slideInFromRight 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.slide-in-left {
+  animation: slideInFromLeft 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* WebGL-like effects */
+.webgl-gradient {
+  background: linear-gradient(45deg, #2563eb, #14b8a6, #06b6d4);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+.webgl-blur {
+  filter: drop-shadow(0 0 20px rgba(37, 99, 235, 0.2));
+}
+
+.webgl-glow {
+  box-shadow: 0 0 40px rgba(37, 99, 235, 0.3), inset 0 0 40px rgba(37, 99, 235, 0.1);
+}
+
+/* Smooth transform effects */
+.transform-gpu {
+  transform: translateZ(0);
+}
+
+.will-change-transform {
+  will-change: transform;
+}
+
+/* Scroll-linked animations */
+@supports (animation-timeline: view()) {
+  .scroll-fade {
+    animation: fadeInUp linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 25%, cover 45% cover 55%;
+  }
+}
+
+/* =============================================
+   PREFERS-REDUCED-MOTION — disable all animations
+   ============================================= */
+@media (prefers-reduced-motion: reduce) {
+  .animate-gradient-flow,
+  .animate-bounce-subtle,
+  .animate-float,
+  .animate-shimmer,
+  .animate-gradient-shift,
+  .animate-pulse-glow,
+  .icon-float,
+  .scroll-pulse {
+    animation: none !important;
+    transition: none !important;
+  }
+}
