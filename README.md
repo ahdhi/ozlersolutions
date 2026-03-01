@@ -46,7 +46,7 @@ ozlercare-next/
 │       ├── ozlersirs/page.jsx        # /products/ozlersirs
 │       ├── ozlerready/page.jsx       # /products/ozlerready
 │       ├── ozlerpolicy/page.jsx      # /products/ozlerpolicy
-│       ├── skill2care/page.jsx       # /products/skill2care
+│       ├── Skill2Care/page.jsx       # /products/Skill2Care
 │       ├── ozlerpass/page.jsx        # /products/ozlerpass
 │       └── ozlerscribe/page.jsx      # /products/ozlerscribe
 │
@@ -85,7 +85,7 @@ ozlercare-next/
 | `/products/ozlersirs` | `app/products/ozlersirs/page.jsx` | OzlerSIRS product page |
 | `/products/ozlerready` | `app/products/ozlerready/page.jsx` | OzlerReady product page |
 | `/products/ozlerpolicy` | `app/products/ozlerpolicy/page.jsx` | OzlerPolicy product page |
-| `/products/skill2care` | `app/products/skill2care/page.jsx` | skill2care product page |
+| `/products/Skill2Care` | `app/products/Skill2Care/page.jsx` | Skill2Care product page |
 | `/products/ozlerpass` | `app/products/ozlerpass/page.jsx` | OzlerPass product page |
 | `/products/ozlerscribe` | `app/products/ozlerscribe/page.jsx` | OzlerScribe product page |
 | `/pricing` | `app/pricing/page.jsx` | 3 tiers + standalone + FAQ |

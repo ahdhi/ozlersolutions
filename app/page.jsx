@@ -14,9 +14,9 @@ export default function HomePage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-slate-50 via-blue-50/30 to-teal-50/30 overflow-hidden pt-24 pb-16 animate-gradient-flow">
+      <section className="relative min-h-[90vh] flex items-center bg-gradient-to-br from-slate-50 via-teal-50/30 to-emerald-50/30 overflow-hidden pt-24 pb-16 animate-gradient-flow">
         <ParticleCanvas />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(37,99,235,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(37,99,235,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(21,138,128,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(21,138,128,0.03)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
         <GradientOrbs preset="hero" />
         <div className="max-w-7xl mx-auto px-6 md:px-8 w-full relative z-10">
           <HeroContent />
@@ -40,7 +40,7 @@ export default function HomePage() {
             {[
               { icon: ClockIcon, color: 'bg-red-50 text-red-500', title: 'Screening Expiry Wave', desc: 'First wave of 5-year NDIS Worker Screening Checks expiring from February 2026. One expired credential during audit = automatic non-conformance.' },
               { icon: ClipboardDocumentCheckIcon, color: 'bg-amber-50 text-amber-500', title: 'Mandatory Registration', desc: 'SIL and platform providers must register by July 2026 or cease operating. Most have never been audited.' },
-              { icon: ExclamationTriangleIcon, color: 'bg-sky-50 text-oz-blue', title: '24-Hour Reporting', desc: 'Priority 1 incidents must be reported within 24 hours under SIRS. Significant civil penalties for non-compliance.' },
+              { icon: ExclamationTriangleIcon, color: 'bg-teal-50 text-oz-blue', title: '24-Hour Reporting', desc: 'Priority 1 incidents must be reported within 24 hours under SIRS. Significant civil penalties for non-compliance.' },
             ].map(c => (
               <MotionChild key={c.title}>
                 <Card>
@@ -80,20 +80,20 @@ export default function HomePage() {
 
       {/* Flywheel */}
       <ScrollSection variant="fadeUp">
-        <Section className="bg-gradient-to-br from-blue-50 via-slate-50 to-teal-50 relative overflow-hidden">
+        <Section className="bg-gradient-to-br from-teal-50 via-slate-50 to-emerald-50 relative overflow-hidden">
           <GradientOrbs preset="section" />
           <div className="relative z-10">
             <SectionHeader center label="How It Works" title="The Integration Flywheel" description="Every action in one product triggers relevant workflows across the ecosystem." />
             <ScrollSection variant="fadeUp" stagger>
               <div className="grid md:grid-cols-2 gap-6">
                 {[
-                  { icon: ArrowPathIcon, color: 'text-oz-teal', bgColor: 'from-teal-50 to-cyan-50', title: 'Credential Renewal Loop', desc: 'First Aid expires → OzlerShield alerts → One-click skill2care enrolment → Completion auto-updates credential → OzlerPass reflects change' },
-                  { icon: BoltIcon, color: 'text-amber-500', bgColor: 'from-amber-50 to-orange-50', title: 'Incident Response Loop', desc: 'Worker reports incident → OzlerSIRS captures → Investigation reveals training gap → skill2care module assigned automatically' },
-                  { icon: ArchiveBoxIcon, color: 'text-oz-blue', bgColor: 'from-blue-50 to-indigo-50', title: 'Audit Evidence Loop', desc: 'Audit date approaches → OzlerReady generates pack → Pulls live data from Shield + SIRS + Policy → Timestamped, ready to submit' },
-                  { icon: NewspaperIcon, color: 'text-purple-500', bgColor: 'from-purple-50 to-pink-50', title: 'Standards Update Loop', desc: 'Government updates standards → OzlerPolicy flags policies → Drafts revisions → skill2care pushes updated training' },
+                  { icon: ArrowPathIcon, color: 'text-oz-teal', bgColor: 'from-teal-50 to-cyan-50', title: 'Credential Renewal Loop', desc: 'First Aid expires → OzlerShield alerts → One-click Skill2Care enrolment → Completion auto-updates credential → OzlerPass reflects change' },
+                  { icon: BoltIcon, color: 'text-amber-500', bgColor: 'from-amber-50 to-orange-50', title: 'Incident Response Loop', desc: 'Worker reports incident → OzlerSIRS captures → Investigation reveals training gap → Skill2Care module assigned automatically' },
+                  { icon: ArchiveBoxIcon, color: 'text-oz-blue', bgColor: 'from-teal-50 to-cyan-50', title: 'Audit Evidence Loop', desc: 'Audit date approaches → OzlerReady generates pack → Pulls live data from Shield + SIRS + Policy → Timestamped, ready to submit' },
+                  { icon: NewspaperIcon, color: 'text-oz-navy', bgColor: 'from-emerald-50 to-teal-50', title: 'Standards Update Loop', desc: 'Government updates standards → OzlerPolicy flags policies → Drafts revisions → Skill2Care pushes updated training' },
                 ].map((c) => (
                   <MotionChild key={c.title}>
-                    <div className={`bg-gradient-to-br ${c.bgColor} border border-slate-200 rounded-2xl p-8 transition-all duration-400 hover:shadow-[0_20px_60px_rgba(37,99,235,0.15)] hover:-translate-y-2 hover:scale-[1.02] group`}>
+                    <div className={`bg-gradient-to-br ${c.bgColor} border border-slate-200 rounded-2xl p-8 transition-all duration-400 hover:shadow-[0_20px_60px_rgba(21,138,128,0.15)] hover:-translate-y-2 hover:scale-[1.02] group`}>
                       <c.icon className={`w-10 h-10 mb-3 ${c.color} group-hover:scale-110 transition-transform duration-400 icon-float`} />
                       <h4 className="text-oz-navy mb-2 group-hover:text-oz-blue transition-colors duration-300">{c.title}</h4>
                       <p className="text-slate-600 text-sm leading-relaxed">{c.desc}</p>

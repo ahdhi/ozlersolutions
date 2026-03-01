@@ -34,7 +34,7 @@ export function SectionHeader({ label, labelColor, title, description, center, d
 export function PageHero({ breadcrumbs, label, title, description, children, dark }) {
   return (
     <section className={clsx('pt-36 pb-16 md:pt-40 md:pb-20', dark ? 'bg-oz-navy text-white relative overflow-hidden' : 'bg-gradient-to-b from-slate-50 to-white')}>
-      {dark && <div className="absolute inset-0 bg-[linear-gradient(rgba(27,110,194,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(27,110,194,0.05)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" />}
+      {dark && <div className="absolute inset-0 bg-[linear-gradient(rgba(21,138,128,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(21,138,128,0.05)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" />}
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         {breadcrumbs && <Breadcrumb items={breadcrumbs} dark={dark} />}
         <div className="max-w-2xl">
@@ -101,7 +101,7 @@ export function Card({ children, className, href, borderTop }) {
       onMouseLeave={onMouseLeave}
       className={clsx(
         'bg-white border border-slate-200 rounded-2xl p-8 transition-colors duration-400 ease-expo-out',
-        'hover:shadow-[0_20px_60px_rgba(37,99,235,0.12)] hover:border-oz-blue/30',
+        'hover:shadow-[0_20px_60px_rgba(21,138,128,0.12)] hover:border-oz-blue/30',
         'group relative overflow-hidden will-change-transform',
         borderTop && `border-t-[3px] border-t-${borderTop}`,
         className
@@ -122,8 +122,8 @@ export function Card({ children, className, href, borderTop }) {
 
 // --- Badge ---
 const badgeColors = {
-  blue: 'bg-blue-50 text-oz-blue border border-blue-100',
-  teal: 'bg-teal-50 text-oz-teal border border-teal-100',
+  blue: 'bg-teal-50 text-oz-blue border border-teal-100',
+  teal: 'bg-emerald-50 text-oz-teal border border-emerald-100',
   green: 'bg-emerald-50 text-emerald-600 border border-emerald-100',
   amber: 'bg-amber-50 text-amber-600 border border-amber-100',
   red: 'bg-red-50 text-red-600 border border-red-100',
@@ -218,7 +218,7 @@ export function StatsBar({ stats }) {
 // --- Testimonial ---
 export function TestimonialCard({ text, name, role, initials }) {
   return (
-    <div className="bg-white border border-slate-200 rounded-2xl p-9 transition-all duration-400 ease-expo-out hover:shadow-[0_20px_60px_rgba(37,99,235,0.12)] hover:-translate-y-2 hover:border-oz-blue/30 group">
+    <div className="bg-white border border-slate-200 rounded-2xl p-9 transition-all duration-400 ease-expo-out hover:shadow-[0_20px_60px_rgba(21,138,128,0.12)] hover:-translate-y-2 hover:border-oz-blue/30 group">
       <div className="mb-5">
         <svg className="w-10 h-10 text-oz-blue/20 group-hover:text-oz-blue/40 transition-colors duration-400" fill="currentColor" viewBox="0 0 24 24">
           <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>

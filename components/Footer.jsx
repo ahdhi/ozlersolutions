@@ -6,7 +6,7 @@ const footerLinks = {
     { label: 'OzlerSIRS', href: '/products/ozlersirs' },
     { label: 'OzlerReady', href: '/products/ozlerready' },
     { label: 'OzlerPolicy', href: '/products/ozlerpolicy' },
-    { label: 'skill2care', href: '/products/skill2care' },
+    { label: 'Skill2Care', href: '/products/Skill2Care' },
     { label: 'OzlerPass', href: '/products/ozlerpass' },
     { label: 'OzlerScribe', href: '/products/ozlerscribe' },
   ],
@@ -57,7 +57,7 @@ export default function Footer() {
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="#" className="hover:text-white transition-colors">Security</Link>
+            <Link href="/security" className="hover:text-white transition-colors">Security</Link>
           </div>
         </div>
       </div>

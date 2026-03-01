@@ -11,6 +11,9 @@ export const metadata = {
   description: 'Australian care technology company building compliance and workforce management infrastructure for the aged care and NDIS sectors.',
   keywords: ['NDIS compliance', 'aged care technology', 'workforce management', 'SIRS reporting', 'audit readiness', 'Australia'],
   authors: [{ name: 'Ozler Care Solutions' }],
+  icons: {
+    icon: '/favicon.png',
+  },
   openGraph: {
     type: 'website',
     locale: 'en_AU',

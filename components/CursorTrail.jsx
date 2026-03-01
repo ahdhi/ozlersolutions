@@ -37,7 +37,7 @@ export default function CursorTrail() {
         y: e.clientY,
         alpha: 0.55,
         radius: Math.random() * 2.5 + 2,
-        color: isTeal ? '20,184,166' : '37,99,235',
+        color: isTeal ? '44,201,173' : '21,138,128',
       });
 
       // Cap at 18 particles — oldest drops off automatically via alpha fade

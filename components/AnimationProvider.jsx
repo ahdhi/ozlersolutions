@@ -31,7 +31,7 @@ export default function AnimationProvider({ children }) {
         <div
           className="fixed top-0 left-0 right-0 h-[3px] z-[60] pointer-events-none"
           style={{
-            background: 'linear-gradient(90deg, #2563eb 0%, #06b6d4 50%, #14b8a6 100%)',
+            background: 'linear-gradient(90deg, #158A80 0%, #17B8A5 50%, #2CC9AD 100%)',
             transform: `scaleX(${scrollProgress})`,
             transformOrigin: 'left',
           }}

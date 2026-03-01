@@ -8,9 +8,9 @@ import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 
 const colorMap = {
-  blue: 'bg-blue-50 text-oz-blue',
+  blue: 'bg-teal-50 text-oz-blue',
   red: 'bg-red-50 text-red-500',
-  teal: 'bg-teal-50 text-oz-teal',
+  teal: 'bg-emerald-50 text-oz-teal',
   amber: 'bg-amber-50 text-amber-500',
   green: 'bg-emerald-50 text-emerald-500',
 };
@@ -46,8 +46,8 @@ export default function Header() {
           <Image
             src="/Logosq.png"
             alt="Ozler Care Solutions"
-            width={180}
-            height={120}
+            width={220}
+            height={160}
             className="transition-all duration-400 group-hover:scale-105 group-hover:brightness-110"
             priority
           />
@@ -59,7 +59,7 @@ export default function Header() {
 
           {/* Solutions Dropdown */}
           <div className="relative" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
-            <Link href="/solutions" className="flex items-center gap-1 px-4 py-2 font-display text-sm font-medium text-slate-600 rounded-md hover:text-oz-blue hover:bg-blue-50/60 transition-all duration-300">
+            <Link href="/solutions" className="flex items-center gap-1 px-4 py-2 font-display text-sm font-medium text-slate-600 rounded-md hover:text-oz-blue hover:bg-teal-50/60 transition-all duration-300">
               Solutions <ChevronDownIcon className={`w-4 h-4 transition-all duration-400 ease-expo-out ${dropdownOpen ? 'rotate-180 text-oz-teal' : ''}`} />
             </Link>
             <AnimatePresence>
@@ -72,7 +72,7 @@ export default function Header() {
                   className="absolute top-full left-0 w-80 bg-white border border-slate-200 rounded-xl shadow-2xl shadow-slate-200/50 p-2 mt-2"
                 >
                   {products.map((p) => (
-                    <Link key={p.id} href={`/products/${p.id}`} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50/30 transition-all duration-300 group">
+                    <Link key={p.id} href={`/products/${p.id}`} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gradient-to-r hover:from-teal-50 hover:to-emerald-50/30 transition-all duration-300 group">
                       <div className={`w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md ${colorMap[p.color] || 'bg-slate-100'}`}>
                         <p.icon className="w-5 h-5" />
                       </div>
@@ -145,7 +145,7 @@ export default function Header() {
 
 function NavLink({ href, children }) {
   return (
-    <Link href={href} className="px-4 py-2 font-display text-sm font-medium text-slate-600 rounded-md hover:text-oz-blue hover:bg-blue-50/60 transition-all duration-300 relative group">
+    <Link href={href} className="px-4 py-2 font-display text-sm font-medium text-slate-600 rounded-md hover:text-oz-blue hover:bg-teal-50/60 transition-all duration-300 relative group">
       <span className="relative z-10">{children}</span>
       <span className="absolute inset-0 bg-gradient-to-r from-oz-blue/0 via-oz-blue/5 to-oz-blue/0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 rounded-md" />
     </Link>
@@ -154,7 +154,7 @@ function NavLink({ href, children }) {
 
 function MobileLink({ href, children, onClick }) {
   return (
-    <Link href={href} onClick={onClick} className="py-3 px-4 font-display font-medium text-slate-700 hover:text-oz-blue rounded-lg hover:bg-gradient-to-r hover:from-blue-50 hover:to-teal-50/30 transition-all duration-300">
+    <Link href={href} onClick={onClick} className="py-3 px-4 font-display font-medium text-slate-700 hover:text-oz-blue rounded-lg hover:bg-gradient-to-r hover:from-teal-50 hover:to-emerald-50/30 transition-all duration-300">
       {children}
     </Link>
   );

@@ -20,7 +20,7 @@ export default function BlogPost({ params }) {
           <p className="text-lg leading-relaxed">{post.excerpt}</p>
           <p>This is a placeholder for the full blog post content. In production, this would contain the complete article with rich formatting, images, and embedded CTAs.</p>
           <p>The article would cover the topic of <strong>{post.title.toLowerCase()}</strong> in detail, providing actionable guidance for aged care and NDIS providers navigating Australia’s evolving regulatory landscape.</p>
-          <div className="bg-sky-50 rounded-xl p-8 not-prose mt-10">
+          <div className="bg-teal-50 rounded-xl p-8 not-prose mt-10">
             <h3 className="text-lg font-bold text-oz-navy mb-3">Want to stay ahead of regulatory changes?</h3>
             <p className="text-slate-500 mb-4">Book a free compliance assessment and we’ll help you identify your biggest risks.</p>
             <Link href="/contact#demo" className="btn btn-primary">Book Free Assessment</Link>

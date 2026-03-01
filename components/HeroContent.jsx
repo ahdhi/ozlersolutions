@@ -9,12 +9,12 @@ import { useReducedMotion } from '@/hooks/useReducedMotion';
 // Split headline into word groups to preserve styling
 const HEADLINE_SEGMENTS = [
   { text: 'Compliance', gradient: false },
-  { text: 'infrastructure', gradient: false },
+  { text: 'Infrastructure', gradient: false },
   { text: 'for', gradient: false },
-  { text: 'aged care', gradient: true },
+  { text: 'Aged Care', gradient: true },
   { text: '&', gradient: false },
   { text: 'NDIS', gradient: true },
-  { text: 'providers', gradient: false },
+  { text: 'Providers', gradient: false },
 ];
 
 const wordContainer = {
@@ -49,13 +49,13 @@ export default function HeroContent() {
   if (shouldReduce) {
     return (
       <div className="max-w-2xl">
-        <span className="label block mb-4">Australian Care Technology</span>
+        <span className="label block mb-4">Technology for Australian Care</span>
         <h1 className="text-oz-navy">
-          Compliance infrastructure for <span className="text-gradient">aged care</span> &{' '}
+          Compliance Infrastructure for <span className="text-gradient">Aged Care</span> &{' '}
           <span className="text-gradient">NDIS</span> providers
         </h1>
         <p className="text-lg text-slate-600 mt-6 mb-8 leading-relaxed">
-          Automated workforce compliance, incident management, audit readiness, and training — purpose-built for Australia's regulatory landscape. Stop scrambling before audits. Start being continuously compliant.
+          Our education platform is your compliance foundation. Train your workforce, then expand with our connected suite of tools—automated compliance, incident management, and audit readiness—all purpose-built for Australia's regulatory landscape.
         </p>
         <div className="flex gap-4 flex-wrap">
           <Link href="/contact#demo" className="btn btn-primary btn-lg">Book a Demo</Link>
@@ -79,7 +79,7 @@ export default function HeroContent() {
         animate={{ opacity: 1, x: 0 }}
         transition={{ type: 'spring', stiffness: 80, damping: 16, delay: 0 }}
       >
-        Australian Care Technology
+        Technology for Australian Care
       </motion.span>
 
       {/* Animated headline — word by word */}
@@ -112,8 +112,7 @@ export default function HeroContent() {
         initial="hidden"
         animate="visible"
       >
-        Automated workforce compliance, incident management, audit readiness, and training — purpose-built for Australia's regulatory landscape. Stop scrambling before audits. Start being continuously compliant.
-      </motion.p>
+The training platform that becomes your compliance engine. Start with workforce education. Grow into automated credential tracking, 24-hour incident reporting, audit readiness, and living policy management — all interconnected, all purpose-built for Australia's regulatory landscape.      </motion.p>
 
       {/* CTA buttons */}
       <motion.div
