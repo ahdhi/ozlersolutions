@@ -15,7 +15,7 @@ const footerLinks = {
     { label: 'Partners', href: '/partners' },
     { label: 'Blog', href: '/blog' },
     { label: 'Contact', href: '/contact' },
-    { label: 'Careers', href: '/contact#careers' },
+    { label: 'Careers', href: '/careers' },
   ],
   Resources: [
     { label: 'Compliance Hub', href: '/compliance' },

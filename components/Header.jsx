@@ -91,6 +91,7 @@ export default function Header() {
           <NavLink href="/compliance">Compliance</NavLink>
           <NavLink href="/partners">Partners</NavLink>
           <NavLink href="/blog">Blog</NavLink>
+          <NavLink href="/careers">Careers</NavLink>
         </nav>
 
         {/* CTA */}
@@ -134,6 +135,7 @@ export default function Header() {
               <MobileLink href="/compliance" onClick={() => setMobileOpen(false)}>Compliance</MobileLink>
               <MobileLink href="/partners" onClick={() => setMobileOpen(false)}>Partners</MobileLink>
               <MobileLink href="/blog" onClick={() => setMobileOpen(false)}>Blog</MobileLink>
+              <MobileLink href="/careers" onClick={() => setMobileOpen(false)}>Careers</MobileLink>
               <MobileLink href="/contact" onClick={() => setMobileOpen(false)}>Contact</MobileLink>
             </div>
           </motion.nav>

@@ -48,7 +48,7 @@ export default function ContactPage() {
                 <BriefcaseIcon className="w-5 h-5 text-oz-blue" /> Careers
               </h4>
               <p className="text-slate-500">We're building a team of people who care about making care better.</p>
-              <a href="mailto:careers@ozlercare.com.au" className="text-oz-blue font-semibold text-sm mt-2 inline-block">careers@ozlercare.com.au →</a>
+              <a href="/careers" className="text-oz-blue font-semibold text-sm mt-2 inline-block">View open positions →</a>
             </div>
           </div>
         </div>
