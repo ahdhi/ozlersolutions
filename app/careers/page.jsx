@@ -19,7 +19,8 @@ import {
 } from '@heroicons/react/24/outline';
 
 
-const WEB3FORMS_ACCESS_KEY = '0418d73a-08b4-4f2c-9230-bee714461085';
+
+const FORMSPREE_FORM_ID = 'mjgenpgk';
 
 const badgeColorMap = {
   'Internship': 'amber',
@@ -79,9 +80,7 @@ export default function CareersPage() {
 
     try {
       const data = new FormData();
-      data.append('access_key', WEB3FORMS_ACCESS_KEY);
-      data.append('subject', `New Career Application — ${formData.position}`);
-      data.append('from_name', 'Ozler Careers Form');
+      data.append('_subject', `New Career Application — ${formData.position}`);
       data.append('Name', formData.name);
       data.append('Email', formData.email);
       data.append('Phone', formData.phone);
@@ -90,14 +89,15 @@ export default function CareersPage() {
       if (formData.message) data.append('Cover Letter / Message', formData.message);
       if (file) data.append('Resume', file);
 
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
         method: 'POST',
         body: data,
+        headers: { Accept: 'application/json' },
       });
 
       const result = await res.json();
 
-      if (result.success) {
+      if (result.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', phone: '', position: '', linkedin: '', message: '' });
         setFile(null);
