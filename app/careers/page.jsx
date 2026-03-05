@@ -48,15 +48,16 @@ export default function CareersPage() {
 function CareersContent() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [selectedPosition, setSelectedPosition] = useState('');
   const fileInputRef = useRef(null);
+  const formRef = useRef(null);
 
   useEffect(() => {
     if (searchParams.get('submitted') === 'true') {
       setSubmitted(true);
-      // Scroll to the form section
       document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
     }
   }, [searchParams]);
@@ -77,6 +78,41 @@ function CareersContent() {
   const removeFile = () => {
     setFile(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    setSubmitting(true);
+
+    try {
+      const formData = new FormData(formRef.current);
+
+      // Append the file from state since the input may be hidden
+      if (file) {
+        formData.set('file', file, file.name);
+      }
+
+      const res = await fetch(FORMINIT_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (res.ok) {
+        setSubmitted(true);
+        setFile(null);
+        formRef.current?.reset();
+        setSelectedPosition('');
+        document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        const text = await res.text().catch(() => '');
+        setError(text || 'Something went wrong. Please try again.');
+      }
+    } catch (err) {
+      setError('Network error. Please check your connection and try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -271,13 +307,10 @@ function CareersContent() {
             </div>
           ) : (
             <form
-              action={FORMINIT_ENDPOINT}
-              method="POST"
-              encType="multipart/form-data"
+              ref={formRef}
+              onSubmit={handleSubmit}
               className="space-y-5"
             >
-              {/* Hidden redirect field */}
-              <input type="hidden" name="_redirect" value={typeof window !== 'undefined' ? `${window.location.origin}/careers?submitted=true#apply` : '/careers?submitted=true#apply'} />
 
               {/* Name */}
               <div>
@@ -356,7 +389,7 @@ function CareersContent() {
                     <input
                       ref={fileInputRef}
                       type="file"
-                      name="upload"
+                      name="file"
                       accept=".pdf,.doc,.docx"
                       required
                       onChange={handleFileChange}
@@ -395,9 +428,10 @@ function CareersContent() {
               {/* Submit */}
               <button
                 type="submit"
-                className="btn btn-primary btn-lg w-full"
+                disabled={submitting}
+                className="btn btn-primary btn-lg w-full disabled:opacity-60"
               >
-                Submit Application
+                {submitting ? 'Submitting...' : 'Submit Application'}
               </button>
 
               <p className="text-xs text-slate-400 text-center">
