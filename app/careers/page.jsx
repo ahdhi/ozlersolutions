@@ -1,7 +1,8 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect, Suspense } from 'react';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Section, SectionHeader, CTASection, Badge, Breadcrumb } from '@/components/UI';
 import { jobOpenings } from '@/lib/data';
 import GradientOrbs from '@/components/GradientOrbs';
@@ -20,7 +21,7 @@ import {
 
 
 
-const FORMSPREE_FORM_ID = 'mjgenpgk';
+const FORMINIT_ENDPOINT = 'https://forminit.com/f/3vycoymv2tq';
 
 const badgeColorMap = {
   'Internship': 'amber',
@@ -37,30 +38,35 @@ const perks = [
 ];
 
 export default function CareersPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    position: '',
-    linkedin: '',
-    message: '',
-  });
-  const [file, setFile] = useState(null);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
-  const fileInputRef = useRef(null);
-  const formRef = useRef(null);
+  return (
+    <Suspense fallback={null}>
+      <CareersContent />
+    </Suspense>
+  );
+}
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+function CareersContent() {
+  const searchParams = useSearchParams();
+  const [submitted, setSubmitted] = useState(false);
+  const [file, setFile] = useState(null);
+  const [error, setError] = useState('');
+  const [selectedPosition, setSelectedPosition] = useState('');
+  const fileInputRef = useRef(null);
+
+  useEffect(() => {
+    if (searchParams.get('submitted') === 'true') {
+      setSubmitted(true);
+      // Scroll to the form section
+      document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [searchParams]);
 
   const handleFileChange = (e) => {
     const selected = e.target.files?.[0];
     if (selected) {
       if (selected.size > 10 * 1024 * 1024) {
         setError('File size must be under 10 MB.');
+        e.target.value = '';
         return;
       }
       setFile(selected);
@@ -71,45 +77,6 @@ export default function CareersPage() {
   const removeFile = () => {
     setFile(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitting(true);
-    setError('');
-
-    try {
-      const data = new FormData();
-      data.append('_subject', `New Career Application — ${formData.position}`);
-      data.append('Name', formData.name);
-      data.append('Email', formData.email);
-      data.append('Phone', formData.phone);
-      data.append('Position', formData.position);
-      if (formData.linkedin) data.append('LinkedIn', formData.linkedin);
-      if (formData.message) data.append('Cover Letter / Message', formData.message);
-      if (file) data.append('Resume', file);
-
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_FORM_ID}`, {
-        method: 'POST',
-        body: data,
-        headers: { Accept: 'application/json' },
-      });
-
-      const result = await res.json();
-
-      if (result.ok) {
-        setSubmitted(true);
-        setFormData({ name: '', email: '', phone: '', position: '', linkedin: '', message: '' });
-        setFile(null);
-        if (fileInputRef.current) fileInputRef.current.value = '';
-      } else {
-        setError(result.message || 'Something went wrong. Please try again.');
-      }
-    } catch {
-      setError('Network error. Please check your connection and try again.');
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   return (
@@ -249,7 +216,7 @@ export default function CareersPage() {
                 </ul>
               </div>
 
-              <a href="#apply" onClick={() => setFormData((prev) => ({ ...prev, position: job.title }))} className="btn btn-primary w-full text-center">
+              <a href="#apply" onClick={() => setSelectedPosition(job.title)} className="btn btn-primary w-full text-center">
                 Apply Now
               </a>
             </div>
@@ -303,7 +270,15 @@ export default function CareersPage() {
               </button>
             </div>
           ) : (
-            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
+            <form
+              action={FORMINIT_ENDPOINT}
+              method="POST"
+              encType="multipart/form-data"
+              className="space-y-5"
+            >
+              {/* Hidden redirect field */}
+              <input type="hidden" name="_redirect" value={typeof window !== 'undefined' ? `${window.location.origin}/careers?submitted=true#apply` : '/careers?submitted=true#apply'} />
+
               {/* Name */}
               <div>
                 <label className="block font-display text-sm font-semibold text-oz-navy mb-1.5">Full Name *</label>
@@ -311,8 +286,6 @@ export default function CareersPage() {
                   type="text"
                   name="name"
                   required
-                  value={formData.name}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors"
                   placeholder="Your full name"
                 />
@@ -326,8 +299,6 @@ export default function CareersPage() {
                     type="email"
                     name="email"
                     required
-                    value={formData.email}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors"
                     placeholder="you@email.com"
                   />
@@ -338,8 +309,6 @@ export default function CareersPage() {
                     type="tel"
                     name="phone"
                     required
-                    value={formData.phone}
-                    onChange={handleChange}
                     className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors"
                     placeholder="04XX XXX XXX"
                   />
@@ -352,8 +321,8 @@ export default function CareersPage() {
                 <select
                   name="position"
                   required
-                  value={formData.position}
-                  onChange={handleChange}
+                  value={selectedPosition}
+                  onChange={(e) => setSelectedPosition(e.target.value)}
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors bg-white"
                 >
                   <option value="">Select a position</option>
@@ -369,8 +338,6 @@ export default function CareersPage() {
                 <input
                   type="url"
                   name="linkedin"
-                  value={formData.linkedin}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors"
                   placeholder="https://linkedin.com/in/yourprofile"
                 />
@@ -389,6 +356,7 @@ export default function CareersPage() {
                     <input
                       ref={fileInputRef}
                       type="file"
+                      name="upload"
                       accept=".pdf,.doc,.docx"
                       required
                       onChange={handleFileChange}
@@ -412,8 +380,6 @@ export default function CareersPage() {
                 <label className="block font-display text-sm font-semibold text-oz-navy mb-1.5">Cover Letter / Message</label>
                 <textarea
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors min-h-[140px] resize-y"
                   placeholder="Tell us why you're interested in this role and what you'd bring to the team..."
                 />
@@ -429,10 +395,9 @@ export default function CareersPage() {
               {/* Submit */}
               <button
                 type="submit"
-                disabled={submitting}
-                className="btn btn-primary btn-lg w-full disabled:opacity-60 disabled:cursor-not-allowed"
+                className="btn btn-primary btn-lg w-full"
               >
-                {submitting ? 'Submitting...' : 'Submit Application'}
+                Submit Application
               </button>
 
               <p className="text-xs text-slate-400 text-center">

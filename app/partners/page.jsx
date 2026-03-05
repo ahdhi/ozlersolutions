@@ -1,7 +1,16 @@
 import Link from 'next/link';
 import { Section, SectionHeader, PageHero, CTASection, Card, FeatureList } from '@/components/UI';
 import { partnerTypes } from '@/lib/data';
-export const metadata = { title: 'Partners' };
+export const metadata = {
+  title: 'Partner Program — Grow with Ozler',
+  description: 'Partner with Ozler Care Solutions as an RTO, quality auditor, consultant, or technology provider. Revenue sharing, referral pipelines, API integrations, and co-marketing opportunities.',
+  alternates: { canonical: '/partners' },
+  openGraph: {
+    title: 'Partner Program — Ozler Care Solutions',
+    description: 'Grow with Ozler. Partnerships for RTOs, auditors, consultants, and technology providers.',
+    url: '/partners',
+  },
+};
 
 export default function PartnersPage() {
   return (

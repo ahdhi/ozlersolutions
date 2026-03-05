@@ -3,7 +3,30 @@ import { Section, PageHero, Badge, CTASection } from '@/components/UI';
 import { blogPosts } from '@/lib/data';
 
 export function generateStaticParams() { return blogPosts.map(p => ({ slug: p.slug })); }
-export function generateMetadata({ params }) { const post = blogPosts.find(p => p.slug === params.slug); return { title: post?.title || 'Blog Post' }; }
+
+export function generateMetadata({ params }) {
+  const post = blogPosts.find(p => p.slug === params.slug);
+  if (!post) return { title: 'Blog Post' };
+  return {
+    title: post.title,
+    description: post.excerpt,
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `/blog/${post.slug}`,
+      type: 'article',
+      publishedTime: post.date,
+      authors: ['Ozler Care Solutions'],
+      tags: [post.tag],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+    },
+  };
+}
 
 export default function BlogPost({ params }) {
   const post = blogPosts.find(p => p.slug === params.slug);

@@ -1,5 +1,10 @@
 import { Section, PageHero } from '@/components/UI';
-export const metadata = { title: 'Security Policy' };
+export const metadata = {
+  title: 'Security Policy',
+  description: 'Ozler Care Solutions security policy. Technical and organisational measures for protecting information assets, data encryption, access controls, and incident response procedures.',
+  alternates: { canonical: '/security' },
+  robots: { index: true, follow: true },
+};
 
 export default function SecurityPage() {
   return (

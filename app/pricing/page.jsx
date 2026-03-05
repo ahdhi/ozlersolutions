@@ -1,6 +1,15 @@
 import { Section, SectionHeader, PageHero, CTASection, PricingCard, Card, Accordion } from '@/components/UI';
 import { pricingTiers, standaloneProducts } from '@/lib/data';
-export const metadata = { title: 'Pricing' };
+export const metadata = {
+  title: 'Pricing — Simple, Transparent Plans',
+  description: 'Flexible per-worker pricing for Ozler Care Solutions products. Start with what you need, scale as you grow. Free beta program available for qualifying NDIS and aged care providers.',
+  alternates: { canonical: '/pricing' },
+  openGraph: {
+    title: 'Pricing — Ozler Care Solutions',
+    description: 'Simple, transparent per-worker pricing for compliance and workforce management tools.',
+    url: '/pricing',
+  },
+};
 
 const faq = [
   { q: 'Is there a free trial?', a: 'We offer a free beta program for qualifying providers. Full access to OzlerShield for 30 days with dedicated onboarding. Contact us to check eligibility.' },

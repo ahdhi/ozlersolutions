@@ -1,7 +1,16 @@
 import Link from 'next/link';
 import { Section, PageHero, Badge } from '@/components/UI';
 import { blogPosts } from '@/lib/data';
-export const metadata = { title: 'Blog' };
+export const metadata = {
+  title: 'Blog — Compliance Insights & Regulatory Updates',
+  description: 'Expert analysis on aged care and NDIS regulatory changes, compliance best practices, workforce management, SIRS reporting, worker screening, and care technology trends in Australia.',
+  alternates: { canonical: '/blog' },
+  openGraph: {
+    title: 'Blog — Ozler Care Solutions',
+    description: 'Expert analysis on regulatory changes, compliance best practices, and care technology trends for Australian providers.',
+    url: '/blog',
+  },
+};
 
 const tagColors = { Compliance: 'red', Regulation: 'blue', SIRS: 'red', Standards: 'blue', Training: 'green', Workforce: 'blue', Technology: 'amber' };
 

@@ -1,5 +1,10 @@
 import { Section, PageHero } from '@/components/UI';
-export const metadata = { title: 'Terms of Service' };
+export const metadata = {
+  title: 'Terms of Service',
+  description: 'Terms of service for Ozler Care Solutions products and services including OzlerShield, OzlerSIRS, OzlerReady, OzlerPolicy, Skill2Care, OzlerPass, and OzlerScribe.',
+  alternates: { canonical: '/terms' },
+  robots: { index: true, follow: true },
+};
 
 export default function TermsPage() {
   return (

@@ -1,6 +1,15 @@
 import { Section, SectionHeader, PageHero, CTASection, Card, Timeline } from '@/components/UI';
 import { regulatoryTimeline } from '@/lib/data';
-export const metadata = { title: 'Compliance Hub' };
+export const metadata = {
+  title: 'Compliance Hub — Regulatory Timeline & Resources',
+  description: 'Stay ahead of aged care and NDIS regulatory changes. Key compliance dates, deadlines, and resources including SIRS reporting, worker screening expiry, mandatory registration, and strengthened quality standards.',
+  alternates: { canonical: '/compliance' },
+  openGraph: {
+    title: 'Compliance Hub — Ozler Care Solutions',
+    description: 'Your resource hub for understanding aged care and NDIS regulatory changes, deadlines, and how to prepare.',
+    url: '/compliance',
+  },
+};
 
 export default function CompliancePage() {
   return (

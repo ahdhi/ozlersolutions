@@ -1,7 +1,16 @@
 import { Section, SectionHeader, PageHero, CTASection, Card, Timeline } from '@/components/UI';
 import { companyValues } from '@/lib/data';
 import Image from 'next/image';
-export const metadata = { title: 'About Us' };
+export const metadata = {
+  title: 'About Us',
+  description: 'Learn about Ozler Care Solutions — an Australian care technology company founded in 2026 to build compliance and workforce management infrastructure for the aged care and NDIS sectors.',
+  alternates: { canonical: '/about' },
+  openGraph: {
+    title: 'About Ozler Care Solutions',
+    description: 'Australian care technology company building compliance infrastructure for aged care and NDIS providers.',
+    url: '/about',
+  },
+};
 
 const timeline = [
   { date: 'November 2025', status: 'ACTIVE', title: 'Strengthened Quality Standards take effect', desc: 'The most detailed aged care standards in 30 years. Every provider must update their entire policy suite.' },

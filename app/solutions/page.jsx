@@ -1,7 +1,16 @@
 import Link from 'next/link';
 import { Section, SectionHeader, PageHero, CTASection, Badge, FeatureList } from '@/components/UI';
 import { products } from '@/lib/data';
-export const metadata = { title: 'Solutions' };
+export const metadata = {
+  title: 'Solutions — Integrated Compliance Ecosystem',
+  description: 'Seven integrated products covering worker screening, SIRS incident reporting, audit readiness, policy management, credential passports, training, and clinical documentation for Australian care providers.',
+  alternates: { canonical: '/solutions' },
+  openGraph: {
+    title: 'Solutions — Ozler Care Solutions',
+    description: 'Seven integrated products forming a complete compliance ecosystem for Australian aged care and NDIS providers.',
+    url: '/solutions',
+  },
+};
 
 export default function SolutionsPage() {
   return (

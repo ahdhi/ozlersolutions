@@ -1,5 +1,10 @@
 import { Section, PageHero } from '@/components/UI';
-export const metadata = { title: 'Privacy Policy' };
+export const metadata = {
+  title: 'Privacy Policy',
+  description: 'Ozler Care Solutions privacy policy. How we collect, use, disclose, and protect personal information in compliance with the Australian Privacy Principles.',
+  alternates: { canonical: '/privacy' },
+  robots: { index: true, follow: true },
+};
 
 export default function PrivacyPage() {
   return (

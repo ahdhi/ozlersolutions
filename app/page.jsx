@@ -8,6 +8,17 @@ import HeroContent from '@/components/HeroContent';
 import ParticleCanvas from '@/components/ParticleCanvas';
 import GradientOrbs from '@/components/GradientOrbs';
 
+export const metadata = {
+  title: 'Ozler Care Solutions — Compliance & Workforce Technology for Aged Care & NDIS',
+  description: 'Australia\'s integrated compliance platform for aged care and NDIS providers. Worker screening, SIRS incident reporting, audit readiness, policy management, training, and clinical documentation — seven products, one ecosystem.',
+  alternates: { canonical: '/' },
+  openGraph: {
+    title: 'Ozler Care Solutions — Technology for Safer Care',
+    description: 'Integrated compliance ecosystem for Australian aged care and NDIS providers. Worker screening, incident reporting, audit readiness, and more.',
+    url: '/',
+  },
+};
+
 const colorBorder = { blue: 'border-t-oz-blue', red: 'border-t-red-500', teal: 'border-t-oz-teal', amber: 'border-t-amber-500', green: 'border-t-emerald-500' };
 
 export default function HomePage() {
