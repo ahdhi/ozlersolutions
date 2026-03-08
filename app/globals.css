@@ -246,6 +246,75 @@
 /* =============================================
    PREFERS-REDUCED-MOTION — disable all animations
    ============================================= */
+/* =============================================
+   LEGAL / PROSE PAGE STYLES
+   ============================================= */
+.legal-prose {
+  @apply max-w-3xl mx-auto;
+}
+
+.legal-prose h2 {
+  @apply !text-xl md:!text-2xl !font-bold !font-display !text-oz-navy !mt-12 !mb-4 !pb-3 !border-b !border-slate-200;
+}
+
+.legal-prose h3 {
+  @apply !text-lg !font-semibold !font-display !text-oz-navy-light !mt-8 !mb-3;
+}
+
+.legal-prose p {
+  @apply text-slate-600 leading-relaxed;
+}
+
+.legal-prose ul {
+  @apply !list-none !pl-0 space-y-2;
+}
+
+.legal-prose ul li {
+  @apply relative !pl-6 text-slate-600;
+}
+
+.legal-prose ul li::before {
+  content: '';
+  @apply absolute left-0 top-[0.6em] w-2 h-2 rounded-full bg-oz-blue/30;
+}
+
+.legal-prose strong {
+  @apply text-oz-navy font-semibold;
+}
+
+.legal-prose a {
+  @apply text-oz-blue hover:text-oz-blue-light underline underline-offset-2 decoration-oz-blue/30 hover:decoration-oz-blue transition-colors;
+}
+
+.legal-prose table {
+  @apply !w-full !my-8 !text-sm border-collapse overflow-hidden rounded-xl border border-slate-200;
+}
+
+.legal-prose thead {
+  @apply bg-gradient-to-r from-oz-blue to-oz-teal;
+}
+
+.legal-prose thead th {
+  @apply !text-white !font-display !font-semibold !px-5 !py-3 text-left !border-0;
+}
+
+.legal-prose tbody tr {
+  @apply border-b border-slate-100 transition-colors hover:bg-slate-50/70;
+}
+
+.legal-prose tbody td {
+  @apply !px-5 !py-3 text-slate-600 !border-0;
+}
+
+.legal-prose tbody tr:last-child {
+  @apply border-b-0;
+}
+
+/* Section number badges */
+.legal-section-badge {
+  @apply inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold font-display bg-oz-blue/10 text-oz-blue mb-4;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .animate-gradient-flow,
   .animate-bounce-subtle,

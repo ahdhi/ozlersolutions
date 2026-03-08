@@ -33,14 +33,58 @@ export function SectionHeader({ label, labelColor, title, description, center, d
 // --- Hero ---
 export function PageHero({ breadcrumbs, label, title, description, children, dark }) {
   return (
-    <section className={clsx('pt-36 pb-16 md:pt-40 md:pb-20', dark ? 'bg-oz-navy text-white relative overflow-hidden' : 'bg-gradient-to-b from-slate-50 to-white')}>
-      {dark && <div className="absolute inset-0 bg-[linear-gradient(rgba(21,138,128,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(21,138,128,0.05)_1px,transparent_1px)] bg-[size:60px_60px] [mask-image:radial-gradient(ellipse_80%_60%_at_50%_50%,black_30%,transparent_100%)]" />}
+    <section className={clsx(
+      'pt-36 pb-20 md:pt-44 md:pb-28 relative overflow-hidden',
+      dark ? 'bg-oz-navy text-white' : 'bg-white'
+    )}>
+      {/* Grid pattern */}
+      <div className={clsx(
+        'absolute inset-0 bg-[linear-gradient(rgba(21,138,128,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(21,138,128,0.04)_1px,transparent_1px)] bg-[size:48px_48px]',
+        '[mask-image:radial-gradient(ellipse_80%_70%_at_50%_40%,black_20%,transparent_100%)]',
+        dark && '!bg-[linear-gradient(rgba(21,138,128,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(21,138,128,0.07)_1px,transparent_1px)]'
+      )} />
+
+      {/* Gradient blur orbs */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full blur-[120px] pointer-events-none" style={{
+        background: dark
+          ? 'radial-gradient(circle, rgba(21,138,128,0.15) 0%, transparent 70%)'
+          : 'radial-gradient(circle, rgba(44,201,173,0.12) 0%, transparent 70%)',
+      }} />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full blur-[100px] pointer-events-none" style={{
+        background: dark
+          ? 'radial-gradient(circle, rgba(23,184,165,0.1) 0%, transparent 70%)'
+          : 'radial-gradient(circle, rgba(21,138,128,0.08) 0%, transparent 70%)',
+      }} />
+
+      {/* Decorative corner dots */}
+      <div className="absolute top-20 right-10 md:right-20 opacity-20" aria-hidden="true">
+        <svg width="120" height="120" viewBox="0 0 120 120" fill="none">
+          {[0, 1, 2, 3, 4, 5].map(row =>
+            [0, 1, 2, 3, 4, 5].map(col => (
+              <circle key={`${row}-${col}`} cx={10 + col * 20} cy={10 + row * 20} r={row === col || row + col === 5 ? 3 : 1.5} className={dark ? 'fill-oz-teal' : 'fill-oz-blue'} />
+            ))
+          )}
+        </svg>
+      </div>
+
+      {/* Bottom gradient edge */}
+      <div className={clsx(
+        'absolute bottom-0 left-0 right-0 h-px',
+        dark ? 'bg-gradient-to-r from-transparent via-oz-blue/30 to-transparent' : 'bg-gradient-to-r from-transparent via-slate-200 to-transparent'
+      )} />
+
       <div className="max-w-7xl mx-auto px-6 md:px-8 relative z-10">
         {breadcrumbs && <Breadcrumb items={breadcrumbs} dark={dark} />}
-        <div className="max-w-2xl">
-          {label && <span className={clsx('label block mb-3', dark && 'opacity-80')}>{label}</span>}
-          <h1 className={clsx(dark && 'text-white')}>{title}</h1>
-          {description && <p className={clsx('text-lg mt-6 leading-relaxed', dark ? 'text-slate-300' : 'text-slate-500')}>{description}</p>}
+        <div className="max-w-3xl">
+          {label && <span className={clsx('label block mb-4', dark && 'opacity-80')}>{label}</span>}
+          <h1 className={clsx('tracking-tight', dark && 'text-white')}>{title}</h1>
+          {/* Accent bar */}
+          <div className="flex items-center gap-2 mt-6 mb-2">
+            <div className="h-1 w-10 rounded-full bg-gradient-to-r from-oz-blue to-oz-teal" />
+            <div className="h-1 w-3 rounded-full bg-oz-teal/40" />
+            <div className="h-1 w-1.5 rounded-full bg-oz-teal/20" />
+          </div>
+          {description && <p className={clsx('text-lg mt-4 leading-relaxed max-w-2xl', dark ? 'text-slate-300' : 'text-slate-500')}>{description}</p>}
           {children}
         </div>
       </div>
@@ -51,14 +95,14 @@ export function PageHero({ breadcrumbs, label, title, description, children, dar
 // --- Breadcrumb ---
 export function Breadcrumb({ items, dark }) {
   return (
-    <nav className="flex items-center gap-2 text-sm mb-4">
+    <nav className="flex items-center gap-2 text-sm mb-6">
       {items.map((item, i) => (
         <span key={i} className="flex items-center gap-2">
-          {i > 0 && <ChevronRightIcon className={`w-4 h-4 ${dark ? 'text-slate-600' : 'text-slate-300'}`} />}
+          {i > 0 && <ChevronRightIcon className={clsx('w-3.5 h-3.5', dark ? 'text-slate-600' : 'text-slate-300')} />}
           {item.href ? (
-            <Link href={item.href} className={clsx('hover:text-oz-blue transition-colors', dark ? 'text-slate-400' : 'text-slate-400')}>{item.label}</Link>
+            <Link href={item.href} className={clsx('hover:text-oz-blue transition-colors duration-200', dark ? 'text-slate-400' : 'text-slate-400')}>{item.label}</Link>
           ) : (
-            <span className={dark ? 'text-slate-500' : 'text-slate-500'}>{item.label}</span>
+            <span className={clsx('font-medium', dark ? 'text-slate-300' : 'text-slate-600')}>{item.label}</span>
           )}
         </span>
       ))}

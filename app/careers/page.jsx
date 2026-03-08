@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useEffect, Suspense } from 'react';
-import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Section, SectionHeader, CTASection, Badge, Breadcrumb } from '@/components/UI';
 import { jobOpenings } from '@/lib/data';
@@ -10,31 +9,45 @@ import {
   MapPinIcon,
   BuildingOfficeIcon,
   CheckCircleIcon,
-  ArrowUpTrayIcon,
   SparklesIcon,
   RocketLaunchIcon,
   HeartIcon,
   UserGroupIcon,
-  XMarkIcon,
   BriefcaseIcon,
 } from '@heroicons/react/24/outline';
 
-
-
-const FORMINIT_ENDPOINT = 'https://forminit.com/f/3vycoymv2tq';
-
 const badgeColorMap = {
-  'Internship': 'amber',
+  Internship: 'amber',
   'Full-time': 'blue',
   'Part-time': 'teal',
-  'Contract': 'green',
+  Contract: 'green',
 };
 
 const perks = [
-  { icon: SparklesIcon, title: 'Meaningful Impact', description: 'Your code protects vulnerable Australians. Every feature you build directly improves care quality and safety for real people.' },
-  { icon: RocketLaunchIcon, title: 'Growth & Learning', description: 'Work with cutting-edge tech — AI, LLMs, and modern web frameworks. We invest in your development with learning budgets and mentorship.' },
-  { icon: HeartIcon, title: 'Flexible Work', description: 'Hybrid-first culture with flexible hours. We trust you to do your best work however and wherever suits you.' },
-  { icon: UserGroupIcon, title: 'Collaborative Culture', description: 'Small team, big ambition. You\'ll have a direct line to founders and real ownership over your work from day one.' },
+  {
+    icon: SparklesIcon,
+    title: 'Meaningful Impact',
+    description:
+      'Your code protects vulnerable Australians. Every feature you build directly improves care quality and safety for real people.',
+  },
+  {
+    icon: RocketLaunchIcon,
+    title: 'Growth & Learning',
+    description:
+      'Work with cutting-edge tech — AI, LLMs, and modern web frameworks. We invest in your development with learning budgets and mentorship.',
+  },
+  {
+    icon: HeartIcon,
+    title: 'Flexible Work',
+    description:
+      'Hybrid-first culture with flexible hours. We trust you to do your best work however and wherever suits you.',
+  },
+  {
+    icon: UserGroupIcon,
+    title: 'Collaborative Culture',
+    description:
+      "Small team, big ambition. You'll have a direct line to founders and real ownership over your work from day one.",
+  },
 ];
 
 export default function CareersPage() {
@@ -49,10 +62,8 @@ function CareersContent() {
   const searchParams = useSearchParams();
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [file, setFile] = useState(null);
   const [error, setError] = useState('');
   const [selectedPosition, setSelectedPosition] = useState('');
-  const fileInputRef = useRef(null);
   const formRef = useRef(null);
 
   useEffect(() => {
@@ -62,24 +73,6 @@ function CareersContent() {
     }
   }, [searchParams]);
 
-  const handleFileChange = (e) => {
-    const selected = e.target.files?.[0];
-    if (selected) {
-      if (selected.size > 10 * 1024 * 1024) {
-        setError('File size must be under 10 MB.');
-        e.target.value = '';
-        return;
-      }
-      setFile(selected);
-      setError('');
-    }
-  };
-
-  const removeFile = () => {
-    setFile(null);
-    if (fileInputRef.current) fileInputRef.current.value = '';
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -88,26 +81,23 @@ function CareersContent() {
     try {
       const formData = new FormData(formRef.current);
 
-      // Append the file from state since the input may be hidden
-      if (file) {
-        formData.set('file', file, file.name);
-      }
-
-      const res = await fetch(FORMINIT_ENDPOINT, {
+      const response = await fetch('/api/apply', {
         method: 'POST',
         body: formData,
       });
 
-      if (res.ok) {
-        setSubmitted(true);
-        setFile(null);
-        formRef.current?.reset();
-        setSelectedPosition('');
-        document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        const text = await res.text().catch(() => '');
-        setError(text || 'Something went wrong. Please try again.');
+      const data = await response.json();
+
+      if (!response.ok || !data?.success) {
+        setError(data?.error || 'Something went wrong. Please try again.');
+        setSubmitting(false);
+        return;
       }
+
+      setSubmitted(true);
+      formRef.current?.reset();
+      setSelectedPosition('');
+      document.getElementById('apply')?.scrollIntoView({ behavior: 'smooth' });
     } catch (err) {
       setError('Network error. Please check your connection and try again.');
     } finally {
@@ -135,8 +125,12 @@ function CareersContent() {
                 We&apos;re on a mission to make Australian aged care and disability services safer through intelligent compliance technology. Join a team where your work genuinely matters.
               </p>
               <div className="flex flex-wrap gap-4 mt-8">
-                <a href="#apply" className="btn btn-primary btn-lg">Apply Now</a>
-                <a href="#positions" className="btn btn-secondary btn-lg">View Open Roles</a>
+                <a href="#apply" className="btn btn-primary btn-lg">
+                  Apply Now
+                </a>
+                <a href="#positions" className="btn btn-secondary btn-lg">
+                  View Open Roles
+                </a>
               </div>
               <div className="flex items-center gap-6 mt-8 text-sm text-slate-500">
                 <span className="flex items-center gap-1.5">
@@ -151,18 +145,29 @@ function CareersContent() {
             {/* Right — Role highlights */}
             <div className="hidden lg:flex flex-col gap-4">
               {jobOpenings.map((job) => (
-                <a key={job.id} href="#positions" className="bg-white border border-slate-200 rounded-2xl p-5 flex items-center gap-4 hover:border-oz-blue/30 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 group">
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${
-                    job.color === 'blue' ? 'bg-teal-50 text-oz-blue' :
-                    job.color === 'teal' ? 'bg-emerald-50 text-oz-teal' :
-                    job.color === 'amber' ? 'bg-amber-50 text-amber-500' :
-                    'bg-slate-100 text-slate-500'
-                  }`}>
+                <a
+                  key={job.id}
+                  href="#positions"
+                  className="bg-white border border-slate-200 rounded-2xl p-5 flex items-center gap-4 hover:border-oz-blue/30 hover:shadow-lg hover:shadow-slate-200/50 transition-all duration-300 group"
+                >
+                  <div
+                    className={`w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-105 ${
+                      job.color === 'blue'
+                        ? 'bg-teal-50 text-oz-blue'
+                        : job.color === 'teal'
+                        ? 'bg-emerald-50 text-oz-teal'
+                        : job.color === 'amber'
+                        ? 'bg-amber-50 text-amber-500'
+                        : 'bg-slate-100 text-slate-500'
+                    }`}
+                  >
                     <job.icon className="w-5 h-5" />
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="font-display text-sm font-bold text-oz-navy group-hover:text-oz-blue transition-colors">{job.title}</div>
-                    <div className="text-xs text-slate-400">{job.department} · {job.location}</div>
+                    <div className="text-xs text-slate-400">
+                      {job.department} · {job.location}
+                    </div>
                   </div>
                   <Badge color={badgeColorMap[job.type] || 'blue'}>{job.type}</Badge>
                 </a>
@@ -205,12 +210,17 @@ function CareersContent() {
               className="bg-white border border-slate-200 rounded-2xl p-8 hover:shadow-[0_20px_60px_rgba(21,138,128,0.12)] hover:border-oz-blue/30 transition-all duration-400 group flex flex-col"
             >
               <div className="flex items-start gap-4 mb-5">
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md ${
-                  job.color === 'blue' ? 'bg-teal-50 text-oz-blue' :
-                  job.color === 'teal' ? 'bg-emerald-50 text-oz-teal' :
-                  job.color === 'amber' ? 'bg-amber-50 text-amber-500' :
-                  'bg-slate-100 text-slate-500'
-                }`}>
+                <div
+                  className={`w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110 group-hover:shadow-md ${
+                    job.color === 'blue'
+                      ? 'bg-teal-50 text-oz-blue'
+                      : job.color === 'teal'
+                      ? 'bg-emerald-50 text-oz-teal'
+                      : job.color === 'amber'
+                      ? 'bg-amber-50 text-amber-500'
+                      : 'bg-slate-100 text-slate-500'
+                  }`}
+                >
                   <job.icon className="w-6 h-6" />
                 </div>
                 <div>
@@ -222,8 +232,12 @@ function CareersContent() {
               </div>
 
               <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-slate-500 mb-4">
-                <span className="flex items-center gap-1"><MapPinIcon className="w-4 h-4" /> {job.location}</span>
-                <span className="flex items-center gap-1"><BuildingOfficeIcon className="w-4 h-4" /> {job.department}</span>
+                <span className="flex items-center gap-1">
+                  <MapPinIcon className="w-4 h-4" /> {job.location}
+                </span>
+                <span className="flex items-center gap-1">
+                  <BuildingOfficeIcon className="w-4 h-4" /> {job.department}
+                </span>
               </div>
 
               <p className="text-slate-600 text-[0.95rem] leading-relaxed mb-5 flex-1">{job.description}</p>
@@ -300,24 +314,21 @@ function CareersContent() {
                 <CheckCircleIcon className="w-8 h-8 text-emerald-600" />
               </div>
               <h3 className="text-xl font-display font-bold text-oz-navy mb-2">Application Submitted!</h3>
-              <p className="text-slate-600 mb-6">Thank you for your interest in joining Ozler Care. Our team will review your application and reach out within 5 business days.</p>
+              <p className="text-slate-600 mb-6">
+                Thank you for your interest in joining Ozler Care. Our team will review your application and reach out within 5 business days.
+              </p>
               <button onClick={() => setSubmitted(false)} className="btn btn-secondary btn-sm">
                 Submit Another Application
               </button>
             </div>
           ) : (
-            <form
-              ref={formRef}
-              onSubmit={handleSubmit}
-              className="space-y-5"
-            >
-
+            <form ref={formRef} onSubmit={handleSubmit} className="space-y-5">
               {/* Name */}
               <div>
                 <label className="block font-display text-sm font-semibold text-oz-navy mb-1.5">Full Name *</label>
                 <input
                   type="text"
-                  name="name"
+                  name="fullName"
                   required
                   className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors"
                   placeholder="Your full name"
@@ -360,7 +371,9 @@ function CareersContent() {
                 >
                   <option value="">Select a position</option>
                   {jobOpenings.map((job) => (
-                    <option key={job.id} value={job.title}>{job.title}</option>
+                    <option key={job.id} value={job.title}>
+                      {job.title}
+                    </option>
                   ))}
                 </select>
               </div>
@@ -378,34 +391,15 @@ function CareersContent() {
 
               {/* Resume Upload */}
               <div>
-                <label className="block font-display text-sm font-semibold text-oz-navy mb-1.5">Resume *</label>
-                {!file ? (
-                  <label
-                    className="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-slate-300 rounded-lg cursor-pointer hover:border-oz-blue hover:bg-teal-50/30 transition-all duration-300"
-                  >
-                    <ArrowUpTrayIcon className="w-8 h-8 text-slate-400 mb-2" />
-                    <span className="text-sm font-medium text-slate-600">Click to upload your resume</span>
-                    <span className="text-xs text-slate-400 mt-1">PDF, DOC, or DOCX — Max 10 MB</span>
-                    <input
-                      ref={fileInputRef}
-                      type="file"
-                      name="file"
-                      accept=".pdf,.doc,.docx"
-                      required
-                      onChange={handleFileChange}
-                      className="hidden"
-                    />
-                  </label>
-                ) : (
-                  <div className="flex items-center gap-3 border-2 border-oz-blue/30 bg-teal-50/30 rounded-lg px-4 py-3">
-                    <ArrowUpTrayIcon className="w-5 h-5 text-oz-blue flex-shrink-0" />
-                    <span className="text-sm text-oz-navy font-medium truncate flex-1">{file.name}</span>
-                    <span className="text-xs text-slate-400 flex-shrink-0">{(file.size / 1024).toFixed(0)} KB</span>
-                    <button type="button" onClick={removeFile} className="p-1 hover:bg-red-50 rounded-md transition-colors">
-                      <XMarkIcon className="w-4 h-4 text-slate-400 hover:text-red-500" />
-                    </button>
-                  </div>
-                )}
+                <label className="block font-display text-sm font-semibold text-oz-navy mb-1.5">Resume (PDF/DOC) *</label>
+                <input
+                  type="file"
+                  name="resume"
+                  accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                  required
+                  className="w-full px-4 py-3 border-2 border-slate-300 rounded-lg focus:border-oz-blue focus:outline-none transition-colors bg-white"
+                />
+                <p className="text-xs text-slate-400 mt-2">Upload up to 10MB. We keep your file secure and only share it with the hiring team.</p>
               </div>
 
               {/* Cover Letter / Message */}
@@ -426,17 +420,16 @@ function CareersContent() {
               )}
 
               {/* Submit */}
-              <button
-                type="submit"
-                disabled={submitting}
-                className="btn btn-primary btn-lg w-full disabled:opacity-60"
-              >
+              <button type="submit" disabled={submitting} className="btn btn-primary btn-lg w-full disabled:opacity-60">
                 {submitting ? 'Submitting...' : 'Submit Application'}
               </button>
 
               <p className="text-xs text-slate-400 text-center">
                 By submitting, you consent to Ozler Care Solutions storing and processing your personal data for recruitment purposes in accordance with our{' '}
-                <a href="/privacy" className="text-oz-blue hover:underline">Privacy Policy</a>.
+                <a href="/privacy" className="text-oz-blue hover:underline">
+                  Privacy Policy
+                </a>
+                .
               </p>
             </form>
           )}

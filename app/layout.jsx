@@ -32,7 +32,18 @@ export const metadata = {
   creator: 'Ozler Care Solutions',
   publisher: 'Ozler Care Solutions',
   icons: {
-    icon: '/favicon.png',
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-96x96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.png', sizes: '180x180' },
+    ],
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    title: 'Ozler Care',
   },
   openGraph: {
     type: 'website',
@@ -70,6 +81,11 @@ export const metadata = {
   alternates: {
     canonical: 'https://ozlercaresolutions.com.au',
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || '',
+    // yandex: '',
+    // bing: '',
+  },
 };
 
 const jsonLd = {
@@ -82,7 +98,7 @@ const jsonLd = {
       url: 'https://ozlercaresolutions.com.au',
       logo: {
         '@type': 'ImageObject',
-        url: 'https://ozlercaresolutions.com.au/favicon.png',
+        url: 'https://ozlercaresolutions.com.au/favicon.svg',
       },
       description: 'Australian care technology company building compliance and workforce management infrastructure for the aged care and NDIS sectors.',
       address: {

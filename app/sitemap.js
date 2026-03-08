@@ -34,7 +34,7 @@ export default function sitemap() {
 
   return [...staticPages, ...blogPages].map((page) => ({
     url: `${BASE}${page.path}`,
-    lastModified: new Date().toISOString(),
+    lastModified: new Date().toISOString().split('T')[0],
     changeFrequency: page.changeFrequency,
     priority: page.priority,
   }));

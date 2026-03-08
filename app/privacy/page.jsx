@@ -1,240 +1,324 @@
 import { Section, PageHero } from '@/components/UI';
+import {
+  ShieldCheckIcon,
+  ClockIcon,
+  DocumentTextIcon,
+  EnvelopeIcon,
+} from '@heroicons/react/24/outline';
+
 export const metadata = {
   title: 'Privacy Policy',
-  description: 'Ozler Care Solutions privacy policy. How we collect, use, disclose, and protect personal information in compliance with the Australian Privacy Principles.',
+  description:
+    'Ozler Care Solutions privacy policy. How we collect, use, disclose, and protect personal information in compliance with the Australian Privacy Principles.',
   alternates: { canonical: '/privacy' },
   robots: { index: true, follow: true },
+  openGraph: {
+    title: 'Privacy Policy — Ozler Care Solutions',
+    description: 'How we collect, use, disclose, and protect personal information in compliance with the Australian Privacy Principles.',
+    url: '/privacy',
+  },
 };
+
+const tocItems = [
+  { id: 'introduction', label: '1. Introduction & Scope' },
+  { id: 'definitions', label: '2. Definitions' },
+  { id: 'info-collect', label: '3. Information We Collect' },
+  { id: 'how-collect', label: '4. How We Collect' },
+  { id: 'purposes', label: '5. Purposes' },
+  { id: 'disclosure', label: '6. Disclosure' },
+  { id: 'retention', label: '7. Data Retention' },
+  { id: 'rights', label: '8. Your Rights' },
+  { id: 'security', label: '9. Data Security' },
+  { id: 'breaches', label: '10. Data Breaches' },
+  { id: 'provider-responsibilities', label: '11. Provider Responsibilities' },
+  { id: 'cookies', label: '12. Cookies' },
+  { id: 'children', label: "13. Children's Privacy" },
+  { id: 'changes', label: '14. Changes' },
+  { id: 'contact', label: '15. Contact' },
+];
 
 export default function PrivacyPage() {
   return (
     <>
-      <PageHero breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} title="Privacy Policy">
-        <p className="text-slate-400 mt-2">Effective Date: 1 March 2026 &nbsp;&middot;&nbsp; Version 1.0</p>
+      <PageHero breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Privacy Policy' }]} title="Privacy Policy" description="How we collect, use, disclose, and protect personal information in compliance with the Australian Privacy Principles.">
+        <div className="flex flex-wrap gap-3 mt-6">
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-oz-blue/10 text-oz-blue font-display">
+            <ClockIcon className="w-3.5 h-3.5" /> Effective 1 March 2026
+          </span>
+          <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-slate-100 text-slate-600 font-display">
+            <DocumentTextIcon className="w-3.5 h-3.5" /> Version 1.0
+          </span>
+        </div>
       </PageHero>
+
       <Section>
-        <div className="max-w-3xl mx-auto prose prose-slate prose-lg">
-          <p className="text-slate-500">Ozler Tech Pty Ltd (ABN Pending) trading as Ozler Care Solutions &middot; Melbourne, Victoria, Australia</p>
+        <div className="max-w-7xl mx-auto flex gap-12">
+          {/* Sidebar TOC */}
+          <aside className="hidden lg:block w-64 flex-shrink-0">
+            <div className="sticky top-28">
+              <h4 className="font-display text-xs font-semibold tracking-wider uppercase text-slate-400 mb-4">Contents</h4>
+              <nav className="space-y-1">
+                {tocItems.map((item) => (
+                  <a key={item.id} href={`#${item.id}`} className="block text-sm text-slate-500 hover:text-oz-blue transition-colors py-1 border-l-2 border-transparent hover:border-oz-blue pl-3">
+                    {item.label}
+                  </a>
+                ))}
+              </nav>
+            </div>
+          </aside>
 
-          <h2>1. Introduction and Scope</h2>
-          <p>This Privacy Policy ("Policy") describes how Ozler Tech Pty Ltd (ABN Pending), trading as Ozler Care Solutions ("Ozler," "we," "our," or "us"), collects, holds, uses, discloses, and otherwise handles personal information in connection with its products and services, including OzlerShield, OzlerSIRS, OzlerReady, OzlerPolicy, Skill2Care, OzlerPass, OzlerScribe, and any related platforms, applications, or websites (collectively, the "Services").</p>
-          <p>This Policy applies to all individuals whose personal information we process, including:</p>
-          <ul>
-            <li>Care workers, support workers, and allied health professionals whose credentials, training records, and employment information are managed through the Services ("Workers");</li>
-            <li>Owners, directors, managers, administrators, and other personnel of aged care providers, NDIS providers, and related organisations who access the Services ("Provider Personnel");</li>
-            <li>Participants, residents, consumers, and other individuals receiving care or supports whose information may be incidentally processed through incident reports, progress notes, or clinical documentation ("Care Recipients");</li>
-            <li>Visitors to our website, attendees at events, and individuals who contact us for sales, support, or partnership enquiries ("Prospects");</li>
-            <li>Employees, contractors, and agents of Ozler ("Our Staff").</li>
-          </ul>
-          <p>We are bound by the Australian Privacy Act 1988 (Cth) ("Privacy Act") and the Australian Privacy Principles ("APPs") contained therein. Where applicable, we also comply with state and territory health records legislation, the My Health Records Act 2012 (Cth), and sector-specific obligations under the National Disability Insurance Scheme Act 2013 (Cth) ("NDIS Act"), the Aged Care Act 1997 (Cth), and the Aged Care Quality and Safety Commission Act 2018 (Cth).</p>
+          {/* Content */}
+          <div className="flex-1 min-w-0 prose prose-slate prose-lg legal-prose">
+            <div className="not-prose bg-slate-50 border border-slate-200 rounded-xl px-6 py-4 mb-10 text-sm text-slate-500">
+              <strong className="text-oz-navy">Ozler Tech Pty Ltd</strong> (ABN 49 695 522 724) trading as Ozler Care Solutions &middot; Melbourne, Victoria, Australia
+            </div>
 
-          <h2>2. Definitions</h2>
-          <p><strong>"Personal Information"</strong> has the meaning given in section 6 of the Privacy Act and includes information or an opinion about an identified individual, or an individual who is reasonably identifiable, whether the information or opinion is true or not, and whether recorded in a material form or not.</p>
-          <p><strong>"Sensitive Information"</strong> has the meaning given in section 6 of the Privacy Act and includes health information, biometric information, criminal record information, racial or ethnic origin, and other categories specified in the Act. We treat Worker Screening Check outcomes, incident reports involving Care Recipients, and clinical documentation as Sensitive Information.</p>
-          <p><strong>"Health Information"</strong> has the meaning given in section 6 of the Privacy Act and includes information about an individual's health, disability, or health service provision. Progress notes, clinical documentation generated by OzlerScribe, and SIRS incident reports containing health details are Health Information.</p>
+            <h2 id="introduction">1. Introduction and Scope</h2>
+            <p>This Privacy Policy (&ldquo;Policy&rdquo;) describes how Ozler Tech Pty Ltd (ABN 49 695 522 724), trading as Ozler Care Solutions (&ldquo;Ozler,&rdquo; &ldquo;we,&rdquo; &ldquo;our,&rdquo; or &ldquo;us&rdquo;), collects, holds, uses, discloses, and otherwise handles personal information in connection with its products and services, including OzlerShield, OzlerSIRS, OzlerReady, OzlerPolicy, Skill2Care, OzlerPass, OzlerScribe, and any related platforms, applications, or websites (collectively, the &ldquo;Services&rdquo;).</p>
+            <p>This Policy applies to all individuals whose personal information we process, including:</p>
+            <ul>
+              <li>Care workers, support workers, and allied health professionals whose credentials, training records, and employment information are managed through the Services (&ldquo;Workers&rdquo;);</li>
+              <li>Owners, directors, managers, administrators, and other personnel of aged care providers, NDIS providers, and related organisations who access the Services (&ldquo;Provider Personnel&rdquo;);</li>
+              <li>Participants, residents, consumers, and other individuals receiving care or supports whose information may be incidentally processed through incident reports, progress notes, or clinical documentation (&ldquo;Care Recipients&rdquo;);</li>
+              <li>Visitors to our website, attendees at events, and individuals who contact us for sales, support, or partnership enquiries (&ldquo;Prospects&rdquo;);</li>
+              <li>Employees, contractors, and agents of Ozler (&ldquo;Our Staff&rdquo;).</li>
+            </ul>
+            <p>We are bound by the Australian Privacy Act 1988 (Cth) (&ldquo;Privacy Act&rdquo;) and the Australian Privacy Principles (&ldquo;APPs&rdquo;) contained therein. Where applicable, we also comply with state and territory health records legislation, the My Health Records Act 2012 (Cth), and sector-specific obligations under the National Disability Insurance Scheme Act 2013 (Cth) (&ldquo;NDIS Act&rdquo;), the Aged Care Act 1997 (Cth), and the Aged Care Quality and Safety Commission Act 2018 (Cth).</p>
 
-          <h2>3. Information We Collect</h2>
-          <h3>3.1 Worker Information</h3>
-          <p>Through OzlerShield, OzlerPass, and Skill2Care, we collect and process the following categories of Worker information:</p>
-          <ul>
-            <li><strong>Identity information:</strong> full name, date of birth, photograph, and unique identifiers;</li>
-            <li><strong>Contact information:</strong> email address, phone number, and residential address;</li>
-            <li><strong>Employment information:</strong> employer name, role, work location, employment status, and employment history;</li>
-            <li><strong>Credential and screening information:</strong> NDIS Worker Screening Check number, status, and expiry date; Working With Children Check number and status; National Police Check results; professional registration numbers; First Aid certification details; visa status and work rights;</li>
-            <li><strong>Training records:</strong> Skill2Care module enrolments, completion status, assessment results, digital certificates, and continuing professional development history;</li>
-            <li><strong>OzlerPass profile data:</strong> aggregated verified credential records, sharing history, and QR code generation logs;</li>
-            <li><strong>Voice recordings and transcriptions:</strong> where OzlerScribe is used, audio recordings of shift summaries, AI-generated transcriptions, and structured clinical notes.</li>
-          </ul>
-          <h3>3.2 Provider and Organisation Information</h3>
-          <ul>
-            <li>Business details: entity name, ABN/ACN, registration numbers (NDIS, aged care), business address, and service categories;</li>
-            <li>Personnel details: name, role, email, phone number, and system access permissions of authorised users;</li>
-            <li>Billing information: bank account or credit card details (processed by our PCI-DSS compliant payment processor; we do not store full payment card numbers);</li>
-            <li>Compliance data: policy documents uploaded to OzlerPolicy, audit evidence packs, gap analysis results, self-assessment responses, and registration pathway information;</li>
-            <li>Incident data: SIRS incident reports including incident descriptions, classification decisions, investigation records, corrective action plans, and timestamps.</li>
-          </ul>
-          <h3>3.3 Care Recipient Information</h3>
-          <p>We minimise collection of Care Recipient personal information. However, the following may be incidentally collected through the Services:</p>
-          <ul>
-            <li>First name or initials (in incident reports and progress notes);</li>
-            <li>Health information, disability information, or support needs (in incident reports, investigation records, and clinical documentation);</li>
-            <li>Descriptions of incidents, behaviours, or events involving Care Recipients.</li>
-          </ul>
-          <p>We do not collect Care Recipient financial information, Medicare numbers, or full addresses. Providers are responsible for ensuring their use of the Services complies with their own privacy obligations to Care Recipients.</p>
-          <h3>3.4 Website and Technical Information</h3>
-          <ul>
-            <li>Device and browser information, IP address, and approximate geolocation;</li>
-            <li>Pages visited, features used, session duration, and click patterns;</li>
-            <li>Cookies and similar tracking technologies (see Section 12);</li>
-            <li>Information submitted through contact forms, demo booking requests, and live chat.</li>
-          </ul>
-          <h3>3.5 Information from Third Parties</h3>
-          <p>We may receive information from:</p>
-          <ul>
-            <li>Government screening databases: verification of Worker Screening Check status (where programmatic verification is available);</li>
-            <li>Registered Training Organisations (RTOs): confirmation of qualification completions;</li>
-            <li>Employers: Worker credential submissions and employment verification;</li>
-            <li>Referral partners: contact details of prospective Provider customers.</li>
-          </ul>
+            <h2 id="definitions">2. Definitions</h2>
+            <p><strong>&ldquo;Personal Information&rdquo;</strong> has the meaning given in section 6 of the Privacy Act and includes information or an opinion about an identified individual, or an individual who is reasonably identifiable, whether the information or opinion is true or not, and whether recorded in a material form or not.</p>
+            <p><strong>&ldquo;Sensitive Information&rdquo;</strong> has the meaning given in section 6 of the Privacy Act and includes health information, biometric information, criminal record information, racial or ethnic origin, and other categories specified in the Act. We treat Worker Screening Check outcomes, incident reports involving Care Recipients, and clinical documentation as Sensitive Information.</p>
+            <p><strong>&ldquo;Health Information&rdquo;</strong> has the meaning given in section 6 of the Privacy Act and includes information about an individual&apos;s health, disability, or health service provision. Progress notes, clinical documentation generated by OzlerScribe, and SIRS incident reports containing health details are Health Information.</p>
 
-          <h2>4. How We Collect Information</h2>
-          <p>We collect personal information:</p>
-          <ul>
-            <li>Directly from individuals: when Workers create OzlerPass profiles, when Provider Personnel register accounts, when individuals submit contact forms or attend demos;</li>
-            <li>From employers: when Provider Personnel upload Worker credential data into OzlerShield;</li>
-            <li>Through automated means: when individuals use the Services (usage analytics, voice recordings via OzlerScribe);</li>
-            <li>From third-party sources: government screening databases, RTOs, and referral partners as described in Section 3.5.</li>
-          </ul>
-          <p>Where it is reasonable and practicable to do so, we collect personal information directly from the individual to whom it relates. Where we collect Worker information from employers, we require the employer to have provided appropriate notice to the Worker and to have any necessary consent or authority.</p>
+            <h2 id="info-collect">3. Information We Collect</h2>
 
-          <h2>5. Purposes of Collection, Use, and Disclosure</h2>
-          <h3>5.1 Primary Purposes</h3>
-          <ul>
-            <li>Providing the Services: processing credential verifications, generating expiry alerts, facilitating incident reporting and classification, generating policy documents, delivering training modules, enabling credential sharing, and producing clinical documentation;</li>
-            <li>Account management: creating and managing user accounts, authenticating access, and processing billing;</li>
-            <li>Compliance support: generating audit evidence packs, gap analysis reports, and registration pathway guidance;</li>
-            <li>Communications: sending system notifications, expiry alerts, training reminders, and service-related announcements.</li>
-          </ul>
-          <h3>5.2 Secondary Purposes</h3>
-          <ul>
-            <li>Product improvement: analysing de-identified and aggregated usage data to improve the Services;</li>
-            <li>Security: detecting, preventing, and responding to security incidents, fraud, and unauthorised access;</li>
-            <li>Legal compliance: meeting obligations under the Privacy Act, NDIS Act, Aged Care Act, tax law, and other applicable legislation;</li>
-            <li>Marketing: with consent, sending information about new products, features, and industry updates.</li>
-          </ul>
-          <h3>5.3 AI and Automated Processing</h3>
-          <p>Certain features of the Services use artificial intelligence and machine learning:</p>
-          <ul>
-            <li><strong>OzlerSIRS AI Triage:</strong> analyses structured incident data to suggest a classification (Priority 1, Priority 2, or non-reportable). The AI output is a recommendation only and is never applied without explicit human review and approval by an authorised person. We do not use Care Recipient personal information to train general-purpose AI models.</li>
-            <li><strong>OzlerScribe:</strong> processes voice recordings to generate transcriptions and structured clinical notes. Audio recordings are processed in real-time and stored for audit trail purposes only. We do not use voice recordings to train general-purpose AI models.</li>
-            <li><strong>OzlerPolicy AI Update Engine:</strong> analyses regulatory text to identify affected policies and draft revisions. All drafts require human review before publication.</li>
-          </ul>
-          <p>You have the right to request human review of any automated decision that materially affects you.</p>
+            <h3>3.1 Worker Information</h3>
+            <p>Through OzlerShield, OzlerPass, and Skill2Care, we collect and process the following categories of Worker information:</p>
+            <ul>
+              <li><strong>Identity information:</strong> full name, date of birth, photograph, and unique identifiers;</li>
+              <li><strong>Contact information:</strong> email address, phone number, and residential address;</li>
+              <li><strong>Employment information:</strong> employer name, role, work location, employment status, and employment history;</li>
+              <li><strong>Credential and screening information:</strong> NDIS Worker Screening Check number, status, and expiry date; Working With Children Check number and status; National Police Check results; professional registration numbers; First Aid certification details; visa status and work rights;</li>
+              <li><strong>Training records:</strong> Skill2Care module enrolments, completion status, assessment results, digital certificates, and continuing professional development history;</li>
+              <li><strong>OzlerPass profile data:</strong> aggregated verified credential records, sharing history, and QR code generation logs;</li>
+              <li><strong>Voice recordings and transcriptions:</strong> where OzlerScribe is used, audio recordings of shift summaries, AI-generated transcriptions, and structured clinical notes.</li>
+            </ul>
 
-          <h2>6. Disclosure of Personal Information</h2>
-          <h3>6.1 Categories of Recipients</h3>
-          <p>We may disclose personal information to:</p>
-          <ul>
-            <li><strong>Employers and Provider Personnel:</strong> Worker credential status, training completions, and compliance data are disclosed to the employing Provider through OzlerShield. Workers control the sharing of OzlerPass profiles with specific employers.</li>
-            <li><strong>Approved Quality Auditors:</strong> where a Provider uses OzlerReady to generate an evidence pack, the Provider (not Ozler) chooses to share that pack with their selected auditor.</li>
-            <li><strong>Sub-processors and service providers:</strong> we engage third-party service providers to assist with hosting (Amazon Web Services, Sydney region), email delivery, payment processing, analytics, and customer support. All sub-processors are bound by Data Processing Agreements requiring them to process personal information only on our instructions and to implement appropriate security measures.</li>
-            <li><strong>Registered Training Organisations:</strong> where a Worker enrols in an RTO-delivered module through Skill2Care, the RTO receives the Worker's name, contact details, and enrolment information necessary to deliver the accredited training.</li>
-            <li><strong>Professional advisors:</strong> our lawyers, accountants, auditors, and insurers, to the extent necessary for their professional engagement.</li>
-            <li><strong>Law enforcement and regulators:</strong> where required or authorised by law, including in response to lawful requests from the NDIS Quality and Safeguards Commission, the Aged Care Quality and Safety Commission, state and territory worker screening units, the Australian Information Commissioner, or law enforcement agencies.</li>
-          </ul>
-          <h3>6.2 No Sale of Personal Information</h3>
-          <p>We do not sell, rent, lease, or trade personal information to any third party for their independent use, marketing, or commercial purposes. This is an absolute commitment without exception.</p>
-          <h3>6.3 Cross-Border Disclosure</h3>
-          <p>All primary data storage and processing occurs within Australia (AWS Sydney region, ap-southeast-2). We do not transfer personal information outside Australia except in the following limited circumstances:</p>
-          <ul>
-            <li>Where a sub-processor operates support infrastructure in other jurisdictions (e.g., email delivery services), we ensure contractual protections equivalent to the APPs are in place;</li>
-            <li>Where we are required to do so by Australian law;</li>
-            <li>Where the individual has consented after being informed that APP 8.1 will not apply.</li>
-          </ul>
+            <h3>3.2 Provider and Organisation Information</h3>
+            <ul>
+              <li><strong>Business details:</strong> entity name, ABN/ACN, registration numbers (NDIS, aged care), business address, and service categories;</li>
+              <li><strong>Personnel details:</strong> name, role, email, phone number, and system access permissions of authorised users;</li>
+              <li><strong>Billing information:</strong> bank account or credit card details (processed by our PCI-DSS compliant payment processor; we do not store full payment card numbers);</li>
+              <li><strong>Compliance data:</strong> policy documents uploaded to OzlerPolicy, audit evidence packs, gap analysis results, self-assessment responses, and registration pathway information;</li>
+              <li><strong>Incident data:</strong> SIRS incident reports including incident descriptions, classification decisions, investigation records, corrective action plans, and timestamps.</li>
+            </ul>
 
-          <h2>7. Data Retention</h2>
-          <p>We retain personal information only for as long as necessary to fulfil the purposes for which it was collected, or as required by law. Our specific retention periods are:</p>
-          <table>
-            <thead>
-              <tr><th>Data Category</th><th>Retention Period</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Worker credential records</td><td>Duration of active use plus 7 years after last activity, or as required by the employing Provider's record-keeping obligations</td></tr>
-              <tr><td>SIRS incident reports</td><td>7 years from the date of the incident, or longer if required by the NDIS Act, Aged Care Act, or an ongoing investigation</td></tr>
-              <tr><td>OzlerScribe voice recordings</td><td>12 months from creation, unless the Provider configures a shorter retention period</td></tr>
-              <tr><td>OzlerScribe transcriptions and structured notes</td><td>As directed by the Provider, subject to minimum 7-year clinical record retention</td></tr>
-              <tr><td>Training records (Skill2Care)</td><td>Duration of active use plus 7 years, consistent with RTO record-keeping requirements</td></tr>
-              <tr><td>Policy documents (OzlerPolicy)</td><td>Duration of active subscription plus 30 days for data export</td></tr>
-              <tr><td>Billing and payment records</td><td>7 years as required by the Income Tax Assessment Act 1997 (Cth)</td></tr>
-              <tr><td>Website analytics and cookies</td><td>26 months from collection</td></tr>
-              <tr><td>Contact form submissions</td><td>2 years from submission, or until the enquiry is resolved, whichever is later</td></tr>
-            </tbody>
-          </table>
-          <p>Upon expiry of the applicable retention period, personal information is securely destroyed or irreversibly de-identified in accordance with our Data Destruction Policy.</p>
+            <h3>3.3 Care Recipient Information</h3>
+            <p>We minimise collection of Care Recipient personal information. However, the following may be incidentally collected through the Services:</p>
+            <ul>
+              <li>First name or initials (in incident reports and progress notes);</li>
+              <li>Health information, disability information, or support needs (in incident reports, investigation records, and clinical documentation);</li>
+              <li>Descriptions of incidents, behaviours, or events involving Care Recipients.</li>
+            </ul>
+            <p>We do not collect Care Recipient financial information, Medicare numbers, or full addresses. Providers are responsible for ensuring their use of the Services complies with their own privacy obligations to Care Recipients.</p>
 
-          <h2>8. Your Rights</h2>
-          <h3>8.1 Access</h3>
-          <p>You have the right to request access to the personal information we hold about you (APP 12). We will respond to access requests within 30 days. We may charge a reasonable fee for providing access where the request requires significant effort to fulfil. We will not charge for making the request itself.</p>
-          <h3>8.2 Correction</h3>
-          <p>You have the right to request correction of personal information that is inaccurate, out of date, incomplete, irrelevant, or misleading (APP 13). We will respond to correction requests within 30 days. If we refuse a correction request, we will provide written reasons and the available complaint mechanisms.</p>
-          <h3>8.3 Deletion</h3>
-          <p>You may request deletion of your personal information. We will comply unless we are required to retain the information by law (e.g., SIRS incident records, tax records) or the information is necessary for an ongoing legal proceeding or investigation. Where deletion is not possible, we will explain the reasons and, where appropriate, restrict processing of the information.</p>
-          <h3>8.4 Portability</h3>
-          <p>Workers may export their OzlerPass profile data in a structured, machine-readable format (JSON or CSV) at any time. Providers may export all data held in the Services in structured formats upon request or through the self-service export function.</p>
-          <h3>8.5 Withdrawal of Consent</h3>
-          <p>Where we rely on consent as the basis for processing, you may withdraw consent at any time. Withdrawal does not affect the lawfulness of processing carried out before withdrawal. To withdraw consent for marketing communications, use the unsubscribe link in any marketing email or contact us at <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue">privacy@ozlercare.com.au</a>.</p>
-          <h3>8.6 Complaints</h3>
-          <p>If you believe we have breached the APPs or this Policy, you may lodge a complaint by contacting our Privacy Officer at <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue">privacy@ozlercare.com.au</a>. We will acknowledge your complaint within 5 business days and provide a substantive response within 30 days. If you are not satisfied with our response, you may escalate to the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.oaic.gov.au</a> or by phone at 1300 363 992.</p>
+            <h3>3.4 Website and Technical Information</h3>
+            <ul>
+              <li>Device and browser information, IP address, and approximate geolocation;</li>
+              <li>Pages visited, features used, session duration, and click patterns;</li>
+              <li>Cookies and similar tracking technologies (see Section 12);</li>
+              <li>Information submitted through contact forms, demo booking requests, and live chat.</li>
+            </ul>
 
-          <h2>9. Data Security</h2>
-          <p>We implement technical and organisational measures to protect personal information from misuse, interference, loss, unauthorised access, modification, or disclosure, including:</p>
-          <ul>
-            <li><strong>Infrastructure:</strong> all data hosted on Amazon Web Services (AWS) in the Sydney region (ap-southeast-2), within IRAP-assessed infrastructure;</li>
-            <li><strong>Encryption:</strong> AES-256 encryption at rest for all stored data; TLS 1.2+ encryption in transit for all data transmissions;</li>
-            <li><strong>Access controls:</strong> role-based access control (RBAC), multi-factor authentication (MFA) for all administrative access, and principle of least privilege;</li>
-            <li><strong>Network security:</strong> web application firewall (WAF), intrusion detection systems, DDoS protection, and network segmentation;</li>
-            <li><strong>Application security:</strong> regular penetration testing, static and dynamic code analysis, dependency vulnerability scanning, and secure software development lifecycle (SSDLC);</li>
-            <li><strong>Employee controls:</strong> background checks, confidentiality agreements, mandatory security training, and access logging;</li>
-            <li><strong>Monitoring:</strong> 24/7 security monitoring, automated alerting, and audit logging with tamper-evident storage;</li>
-            <li><strong>Certifications:</strong> we are pursuing SOC 2 Type II certification and will make the audit report available to enterprise customers under NDA upon completion.</li>
-          </ul>
-          <p>For detailed security measures, refer to our <a href="/security" className="text-oz-blue">Security Policy</a>.</p>
+            <h3>3.5 Information from Third Parties</h3>
+            <p>We may receive information from:</p>
+            <ul>
+              <li><strong>Government screening databases:</strong> verification of Worker Screening Check status (where programmatic verification is available);</li>
+              <li><strong>Registered Training Organisations (RTOs):</strong> confirmation of qualification completions;</li>
+              <li><strong>Employers:</strong> Worker credential submissions and employment verification;</li>
+              <li><strong>Referral partners:</strong> contact details of prospective Provider customers.</li>
+            </ul>
 
-          <h2>10. Notifiable Data Breaches</h2>
-          <p>In the event of an Eligible Data Breach as defined in Part IIIC of the Privacy Act, we will:</p>
-          <ul>
-            <li>Conduct an assessment within 30 days (or sooner where practicable) of becoming aware of grounds to suspect a breach;</li>
-            <li>Where the assessment confirms an Eligible Data Breach, notify the OAIC and affected individuals as soon as practicable, in accordance with section 26WK of the Privacy Act;</li>
-            <li>Provide notification content that includes a description of the breach, the kinds of information involved, and recommended steps individuals should take;</li>
-            <li>Notify affected Providers within 24 hours of confirming a breach involving their data, to enable them to meet their own notification obligations to Workers and Care Recipients;</li>
-            <li>Take reasonable steps to contain the breach and mitigate harm.</li>
-          </ul>
-          <p>We maintain a Data Breach Response Plan that is tested annually through simulated breach exercises.</p>
+            <h2 id="how-collect">4. How We Collect Information</h2>
+            <p>We collect personal information:</p>
+            <ul>
+              <li><strong>Directly from individuals:</strong> when Workers create OzlerPass profiles, when Provider Personnel register accounts, when individuals submit contact forms or attend demos;</li>
+              <li><strong>From employers:</strong> when Provider Personnel upload Worker credential data into OzlerShield;</li>
+              <li><strong>Through automated means:</strong> when individuals use the Services (usage analytics, voice recordings via OzlerScribe);</li>
+              <li><strong>From third-party sources:</strong> government screening databases, RTOs, and referral partners as described in Section 3.5.</li>
+            </ul>
+            <p>Where it is reasonable and practicable to do so, we collect personal information directly from the individual to whom it relates. Where we collect Worker information from employers, we require the employer to have provided appropriate notice to the Worker and to have any necessary consent or authority.</p>
 
-          <h2>11. Provider Responsibilities</h2>
-          <p>Where a Provider uses the Services, the Provider acts as the primary collector of Worker and Care Recipient personal information. Ozler processes this information on the Provider's behalf and in accordance with the Provider's instructions. Providers are responsible for:</p>
-          <ul>
-            <li>Providing appropriate privacy notices to Workers and Care Recipients before uploading their information to the Services;</li>
-            <li>Obtaining any necessary consents, including for voice recording where OzlerScribe is used;</li>
-            <li>Ensuring the accuracy and currency of information uploaded to the Services;</li>
-            <li>Configuring data retention settings in accordance with their regulatory obligations;</li>
-            <li>Responding to access and correction requests from Workers and Care Recipients in relation to information held within the Services, with our reasonable assistance;</li>
-            <li>Complying with the APPs and any applicable state or territory health records legislation in their own right.</li>
-          </ul>
+            <h2 id="purposes">5. Purposes of Collection, Use, and Disclosure</h2>
 
-          <h2>12. Cookies and Tracking Technologies</h2>
-          <p>Our website uses cookies and similar technologies for the following purposes:</p>
-          <ul>
-            <li><strong>Strictly necessary cookies:</strong> required for website functionality, authentication, and security. These cannot be disabled.</li>
-            <li><strong>Analytics cookies:</strong> we use privacy-focused analytics to understand website usage patterns. No personal information is transmitted to third-party analytics providers.</li>
-            <li><strong>Preference cookies:</strong> to remember your settings and preferences.</li>
-          </ul>
-          <p>We do not use third-party advertising cookies or tracking pixels. We do not engage in cross-site tracking, behavioural advertising, or profiling for marketing purposes. You may control cookies through your browser settings. Disabling strictly necessary cookies may impair website functionality.</p>
+            <h3>5.1 Primary Purposes</h3>
+            <ul>
+              <li><strong>Providing the Services:</strong> processing credential verifications, generating expiry alerts, facilitating incident reporting and classification, generating policy documents, delivering training modules, enabling credential sharing, and producing clinical documentation;</li>
+              <li><strong>Account management:</strong> creating and managing user accounts, authenticating access, and processing billing;</li>
+              <li><strong>Compliance support:</strong> generating audit evidence packs, gap analysis reports, and registration pathway guidance;</li>
+              <li><strong>Communications:</strong> sending system notifications, expiry alerts, training reminders, and service-related announcements.</li>
+            </ul>
 
-          <h2>13. Children's Privacy</h2>
-          <p>The Services are not directed at individuals under the age of 18. We do not knowingly collect personal information from children. Where a Care Recipient is a child, we rely on the Provider and the child's parent or guardian to manage privacy in accordance with their obligations under the Privacy Act and the NDIS Act (including the NDIS Code of Conduct).</p>
+            <h3>5.2 Secondary Purposes</h3>
+            <ul>
+              <li><strong>Product improvement:</strong> analysing de-identified and aggregated usage data to improve the Services;</li>
+              <li><strong>Security:</strong> detecting, preventing, and responding to security incidents, fraud, and unauthorised access;</li>
+              <li><strong>Legal compliance:</strong> meeting obligations under the Privacy Act, NDIS Act, Aged Care Act, tax law, and other applicable legislation;</li>
+              <li><strong>Marketing:</strong> with consent, sending information about new products, features, and industry updates.</li>
+            </ul>
 
-          <h2>14. Changes to This Policy</h2>
-          <p>We may update this Policy from time to time to reflect changes in our practices, technology, legal requirements, or regulatory guidance. We will:</p>
-          <ul>
-            <li>Publish the updated Policy on our website with a revised effective date;</li>
-            <li>Notify registered users by email at least 14 days before material changes take effect;</li>
-            <li>Where a change materially expands the purposes for which we use personal information, seek fresh consent where required.</li>
-          </ul>
-          <p>Continued use of the Services after the effective date of an updated Policy constitutes acceptance of the changes.</p>
+            <h3>5.3 AI and Automated Processing</h3>
+            <p>Certain features of the Services use artificial intelligence and machine learning:</p>
+            <ul>
+              <li><strong>OzlerSIRS AI Triage:</strong> analyses structured incident data to suggest a classification (Priority 1, Priority 2, or non-reportable). The AI output is a recommendation only and is never applied without explicit human review and approval by an authorised person. We do not use Care Recipient personal information to train general-purpose AI models.</li>
+              <li><strong>OzlerScribe:</strong> processes voice recordings to generate transcriptions and structured clinical notes. Audio recordings are processed in real-time and stored for audit trail purposes only. We do not use voice recordings to train general-purpose AI models.</li>
+              <li><strong>OzlerPolicy AI Update Engine:</strong> analyses regulatory text to identify affected policies and draft revisions. All drafts require human review before publication.</li>
+            </ul>
+            <p>You have the right to request human review of any automated decision that materially affects you.</p>
 
-          <h2>15. Contact</h2>
-          <p>For all privacy-related enquiries, requests, or complaints:</p>
-          <ul>
-            <li>Privacy Officer: <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue">privacy@ozlercare.com.au</a></li>
-            <li>Postal: Privacy Officer, Ozler Care Solutions, Melbourne VIC 3000, Australia</li>
-            <li>Phone: 1300 OZ CARE</li>
-          </ul>
-          <p>For complaints to the regulator:</p>
-          <ul>
-            <li>Office of the Australian Information Commissioner (OAIC): <a href="https://www.oaic.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.oaic.gov.au</a> &nbsp;&middot;&nbsp; 1300 363 992</li>
-            <li>NDIS Quality and Safeguards Commission: <a href="https://www.ndiscommission.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.ndiscommission.gov.au</a> &nbsp;&middot;&nbsp; 1800 035 544</li>
-          </ul>
+            <h2 id="disclosure">6. Disclosure of Personal Information</h2>
+
+            <h3>6.1 Categories of Recipients</h3>
+            <p>We may disclose personal information to:</p>
+            <ul>
+              <li><strong>Employers and Provider Personnel:</strong> Worker credential status, training completions, and compliance data are disclosed to the employing Provider through OzlerShield. Workers control the sharing of OzlerPass profiles with specific employers.</li>
+              <li><strong>Approved Quality Auditors:</strong> where a Provider uses OzlerReady to generate an evidence pack, the Provider (not Ozler) chooses to share that pack with their selected auditor.</li>
+              <li><strong>Sub-processors and service providers:</strong> we engage third-party service providers to assist with hosting (Amazon Web Services, Sydney region), email delivery, payment processing, analytics, and customer support. All sub-processors are bound by Data Processing Agreements requiring them to process personal information only on our instructions and to implement appropriate security measures.</li>
+              <li><strong>Registered Training Organisations:</strong> where a Worker enrols in an RTO-delivered module through Skill2Care, the RTO receives the Worker&apos;s name, contact details, and enrolment information necessary to deliver the accredited training.</li>
+              <li><strong>Professional advisors:</strong> our lawyers, accountants, auditors, and insurers, to the extent necessary for their professional engagement.</li>
+              <li><strong>Law enforcement and regulators:</strong> where required or authorised by law, including in response to lawful requests from the NDIS Quality and Safeguards Commission, the Aged Care Quality and Safety Commission, state and territory worker screening units, the Australian Information Commissioner, or law enforcement agencies.</li>
+            </ul>
+
+            <h3>6.2 No Sale of Personal Information</h3>
+            <p>We do not sell, rent, lease, or trade personal information to any third party for their independent use, marketing, or commercial purposes. This is an absolute commitment without exception.</p>
+
+            <h3>6.3 Cross-Border Disclosure</h3>
+            <p>All primary data storage and processing occurs within Australia (AWS Sydney region, ap-southeast-2). We do not transfer personal information outside Australia except in the following limited circumstances:</p>
+            <ul>
+              <li>Where a sub-processor operates support infrastructure in other jurisdictions (e.g., email delivery services), we ensure contractual protections equivalent to the APPs are in place;</li>
+              <li>Where we are required to do so by Australian law;</li>
+              <li>Where the individual has consented after being informed that APP 8.1 will not apply.</li>
+            </ul>
+
+            <h2 id="retention">7. Data Retention</h2>
+            <p>We retain personal information only for as long as necessary to fulfil the purposes for which it was collected, or as required by law. Our specific retention periods are:</p>
+            <table>
+              <thead>
+                <tr><th>Data Category</th><th>Retention Period</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Worker credential records</td><td>Duration of active use plus 7 years after last activity, or as required by the employing Provider&apos;s record-keeping obligations</td></tr>
+                <tr><td>SIRS incident reports</td><td>7 years from the date of the incident, or longer if required by the NDIS Act, Aged Care Act, or an ongoing investigation</td></tr>
+                <tr><td>OzlerScribe voice recordings</td><td>12 months from creation, unless the Provider configures a shorter retention period</td></tr>
+                <tr><td>OzlerScribe transcriptions and structured notes</td><td>As directed by the Provider, subject to minimum 7-year clinical record retention</td></tr>
+                <tr><td>Training records (Skill2Care)</td><td>Duration of active use plus 7 years, consistent with RTO record-keeping requirements</td></tr>
+                <tr><td>Policy documents (OzlerPolicy)</td><td>Duration of active subscription plus 30 days for data export</td></tr>
+                <tr><td>Billing and payment records</td><td>7 years as required by the Income Tax Assessment Act 1997 (Cth)</td></tr>
+                <tr><td>Website analytics and cookies</td><td>26 months from collection</td></tr>
+                <tr><td>Contact form submissions</td><td>2 years from submission, or until the enquiry is resolved, whichever is later</td></tr>
+              </tbody>
+            </table>
+            <p>Upon expiry of the applicable retention period, personal information is securely destroyed or irreversibly de-identified in accordance with our Data Destruction Policy.</p>
+
+            <h2 id="rights">8. Your Rights</h2>
+
+            <h3>8.1 Access</h3>
+            <p>You have the right to request access to the personal information we hold about you (APP 12). We will respond to access requests within 30 days. We may charge a reasonable fee for providing access where the request requires significant effort to fulfil. We will not charge for making the request itself.</p>
+
+            <h3>8.2 Correction</h3>
+            <p>You have the right to request correction of personal information that is inaccurate, out of date, incomplete, irrelevant, or misleading (APP 13). We will respond to correction requests within 30 days. If we refuse a correction request, we will provide written reasons and the available complaint mechanisms.</p>
+
+            <h3>8.3 Deletion</h3>
+            <p>You may request deletion of your personal information. We will comply unless we are required to retain the information by law (e.g., SIRS incident records, tax records) or the information is necessary for an ongoing legal proceeding or investigation. Where deletion is not possible, we will explain the reasons and, where appropriate, restrict processing of the information.</p>
+
+            <h3>8.4 Portability</h3>
+            <p>Workers may export their OzlerPass profile data in a structured, machine-readable format (JSON or CSV) at any time. Providers may export all data held in the Services in structured formats upon request or through the self-service export function.</p>
+
+            <h3>8.5 Withdrawal of Consent</h3>
+            <p>Where we rely on consent as the basis for processing, you may withdraw consent at any time. Withdrawal does not affect the lawfulness of processing carried out before withdrawal. To withdraw consent for marketing communications, use the unsubscribe link in any marketing email or contact us at <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue">privacy@ozlercare.com.au</a>.</p>
+
+            <h3>8.6 Complaints</h3>
+            <p>If you believe we have breached the APPs or this Policy, you may lodge a complaint by contacting our Privacy Officer at <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue">privacy@ozlercare.com.au</a>. We will acknowledge your complaint within 5 business days and provide a substantive response within 30 days. If you are not satisfied with our response, you may escalate to the Office of the Australian Information Commissioner (OAIC) at <a href="https://www.oaic.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.oaic.gov.au</a> or by phone at 1300 363 992.</p>
+
+            <h2 id="security">9. Data Security</h2>
+            <p>We implement technical and organisational measures to protect personal information from misuse, interference, loss, unauthorised access, modification, or disclosure, including:</p>
+            <ul>
+              <li><strong>Infrastructure:</strong> all data hosted on Amazon Web Services (AWS) in the Sydney region (ap-southeast-2), within IRAP-assessed infrastructure;</li>
+              <li><strong>Encryption:</strong> AES-256 encryption at rest for all stored data; TLS 1.2+ encryption in transit for all data transmissions;</li>
+              <li><strong>Access controls:</strong> role-based access control (RBAC), multi-factor authentication (MFA) for all administrative access, and principle of least privilege;</li>
+              <li><strong>Network security:</strong> web application firewall (WAF), intrusion detection systems, DDoS protection, and network segmentation;</li>
+              <li><strong>Application security:</strong> regular penetration testing, static and dynamic code analysis, dependency vulnerability scanning, and secure software development lifecycle (SSDLC);</li>
+              <li><strong>Employee controls:</strong> background checks, confidentiality agreements, mandatory security training, and access logging;</li>
+              <li><strong>Monitoring:</strong> 24/7 security monitoring, automated alerting, and audit logging with tamper-evident storage;</li>
+              <li><strong>Certifications:</strong> we are pursuing SOC 2 Type II certification and will make the audit report available to enterprise customers under NDA upon completion.</li>
+            </ul>
+            <p>For detailed security measures, refer to our <a href="/security" className="text-oz-blue">Security Policy</a>.</p>
+
+            <h2 id="breaches">10. Notifiable Data Breaches</h2>
+            <p>In the event of an Eligible Data Breach as defined in Part IIIC of the Privacy Act, we will:</p>
+            <ul>
+              <li>Conduct an assessment within 30 days (or sooner where practicable) of becoming aware of grounds to suspect a breach;</li>
+              <li>Where the assessment confirms an Eligible Data Breach, notify the OAIC and affected individuals as soon as practicable, in accordance with section 26WK of the Privacy Act;</li>
+              <li>Provide notification content that includes a description of the breach, the kinds of information involved, and recommended steps individuals should take;</li>
+              <li>Notify affected Providers within 24 hours of confirming a breach involving their data, to enable them to meet their own notification obligations to Workers and Care Recipients;</li>
+              <li>Take reasonable steps to contain the breach and mitigate harm.</li>
+            </ul>
+            <p>We maintain a Data Breach Response Plan that is tested annually through simulated breach exercises.</p>
+
+            <h2 id="provider-responsibilities">11. Provider Responsibilities</h2>
+            <p>Where a Provider uses the Services, the Provider acts as the primary collector of Worker and Care Recipient personal information. Ozler processes this information on the Provider&apos;s behalf and in accordance with the Provider&apos;s instructions. Providers are responsible for:</p>
+            <ul>
+              <li>Providing appropriate privacy notices to Workers and Care Recipients before uploading their information to the Services;</li>
+              <li>Obtaining any necessary consents, including for voice recording where OzlerScribe is used;</li>
+              <li>Ensuring the accuracy and currency of information uploaded to the Services;</li>
+              <li>Configuring data retention settings in accordance with their regulatory obligations;</li>
+              <li>Responding to access and correction requests from Workers and Care Recipients in relation to information held within the Services, with our reasonable assistance;</li>
+              <li>Complying with the APPs and any applicable state or territory health records legislation in their own right.</li>
+            </ul>
+
+            <h2 id="cookies">12. Cookies and Tracking Technologies</h2>
+            <p>Our website uses cookies and similar technologies for the following purposes:</p>
+            <ul>
+              <li><strong>Strictly necessary cookies:</strong> required for website functionality, authentication, and security. These cannot be disabled.</li>
+              <li><strong>Analytics cookies:</strong> we use privacy-focused analytics to understand website usage patterns. No personal information is transmitted to third-party analytics providers.</li>
+              <li><strong>Preference cookies:</strong> to remember your settings and preferences.</li>
+            </ul>
+            <p>We do not use third-party advertising cookies or tracking pixels. We do not engage in cross-site tracking, behavioural advertising, or profiling for marketing purposes. You may control cookies through your browser settings. Disabling strictly necessary cookies may impair website functionality.</p>
+
+            <h2 id="children">13. Children&apos;s Privacy</h2>
+            <p>The Services are not directed at individuals under the age of 18. We do not knowingly collect personal information from children. Where a Care Recipient is a child, we rely on the Provider and the child&apos;s parent or guardian to manage privacy in accordance with their obligations under the Privacy Act and the NDIS Act (including the NDIS Code of Conduct).</p>
+
+            <h2 id="changes">14. Changes to This Policy</h2>
+            <p>We may update this Policy from time to time to reflect changes in our practices, technology, legal requirements, or regulatory guidance. We will:</p>
+            <ul>
+              <li>Publish the updated Policy on our website with a revised effective date;</li>
+              <li>Notify registered users by email at least 14 days before material changes take effect;</li>
+              <li>Where a change materially expands the purposes for which we use personal information, seek fresh consent where required.</li>
+            </ul>
+            <p>Continued use of the Services after the effective date of an updated Policy constitutes acceptance of the changes.</p>
+
+            <h2 id="contact">15. Contact</h2>
+            <p>For all privacy-related enquiries, requests, or complaints:</p>
+            <div className="not-prose bg-slate-50 border border-slate-200 rounded-xl p-6 space-y-3 my-6">
+              <div className="flex items-center gap-3">
+                <EnvelopeIcon className="w-5 h-5 text-oz-blue flex-shrink-0" />
+                <span className="text-slate-600">Privacy Officer: <a href="mailto:privacy@ozlercare.com.au" className="text-oz-blue hover:underline">privacy@ozlercare.com.au</a></span>
+              </div>
+              <div className="flex items-center gap-3">
+                <DocumentTextIcon className="w-5 h-5 text-oz-blue flex-shrink-0" />
+                <span className="text-slate-600">Postal: Privacy Officer, Ozler Care Solutions, Melbourne VIC 3000, Australia</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <ShieldCheckIcon className="w-5 h-5 text-oz-blue flex-shrink-0" />
+                <span className="text-slate-600">Phone: 1300 OZ CARE</span>
+              </div>
+            </div>
+            <p>For complaints to the regulator:</p>
+            <ul>
+              <li>Office of the Australian Information Commissioner (OAIC): <a href="https://www.oaic.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.oaic.gov.au</a> &middot; 1300 363 992</li>
+              <li>NDIS Quality and Safeguards Commission: <a href="https://www.ndiscommission.gov.au" className="text-oz-blue" target="_blank" rel="noopener noreferrer">www.ndiscommission.gov.au</a> &middot; 1800 035 544</li>
+            </ul>
+          </div>
         </div>
       </Section>
     </>

@@ -100,5 +100,7 @@ module.exports = {
   safelist: [
     'will-change-transform',
   ],
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+  ],
 };

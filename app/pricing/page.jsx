@@ -18,9 +18,26 @@ const faq = [
   { q: 'Do you offer discounts for not-for-profits?', a: 'Yes. 15% discount for registered not-for-profit organisations. Contact sales with your ACNC registration details.' },
 ];
 
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+
 export default function PricingPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
       <PageHero breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Pricing' }]} label="Pricing" title="Simple, transparent pricing" description="Start with what you need. Scale as you grow. Every plan includes onboarding support." />
       <Section>
         <div className="grid md:grid-cols-3 gap-6">{pricingTiers.map(t => <PricingCard key={t.name} {...t} />)}</div>

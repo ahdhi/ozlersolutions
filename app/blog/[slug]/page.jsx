@@ -31,8 +31,54 @@ export function generateMetadata({ params }) {
 export default function BlogPost({ params }) {
   const post = blogPosts.find(p => p.slug === params.slug);
   if (!post) return <div className="pt-40 text-center"><h1>Post not found</h1></div>;
+
+  const blogPostingJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: post.title,
+    description: post.excerpt,
+    datePublished: post.date,
+    dateModified: post.date,
+    author: {
+      '@type': 'Organization',
+      name: 'Ozler Care Solutions',
+      url: 'https://ozlercaresolutions.com.au',
+    },
+    publisher: {
+      '@type': 'Organization',
+      name: 'Ozler Care Solutions',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://ozlercaresolutions.com.au/favicon.svg',
+      },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `https://ozlercaresolutions.com.au/blog/${post.slug}`,
+    },
+    keywords: post.tag,
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ozlercaresolutions.com.au' },
+      { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://ozlercaresolutions.com.au/blog' },
+      { '@type': 'ListItem', position: 3, name: post.title },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(blogPostingJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <PageHero breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog' }, { label: post.title.slice(0, 40) + '...' }]}>
         <div className="flex gap-2 mb-4 mt-2"><Badge color={post.tagColor}>{post.tag}</Badge></div>
         <h1>{post.title}</h1>

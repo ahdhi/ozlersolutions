@@ -1,10 +1,9 @@
 # Ozler Care Solutions — Corporate Website
 
-**Stack:** Next.js 14 (App Router) · React 18 · Tailwind CSS · Static Export  
+**Stack:** Next.js 14 (App Router) · React 18 · Tailwind CSS  
 **Domains:** ozlercaresolutions.com.au / ozlercaresolutions.au
 
 ---
-
 ## Quick Start
 
 ```bash
@@ -15,9 +14,9 @@ npm install
 npm run dev
 # → Open http://localhost:3000
 
-# 3. Build for production (static export)
+# 3. Build for production (server/edge runtime)
 npm run build
-# → Output in /out directory, ready to deploy anywhere
+# Deploy on Vercel (recommended) so API routes run for the careers form
 ```
 
 ---
@@ -64,7 +63,7 @@ ozlercare-next/
 ├── public/                           # Static assets
 │   └── images/                       # Add logos, screenshots, etc.
 │
-├── next.config.js                    # Static export config
+├── next.config.js                    # Next.js config (server/edge runtime)
 ├── tailwind.config.js                # Design tokens (colors, fonts, spacing)
 ├── postcss.config.js                 # PostCSS with Tailwind
 ├── jsconfig.json                     # Path aliases (@/components, @/lib)
@@ -101,12 +100,11 @@ ozlercare-next/
 
 ## Key Design Decisions
 
-### Why Next.js with Static Export?
+### Why Next.js with App Router?
 - **File-based routing** → Each page is a real `/route`, not hash navigation
-- **Static export** (`output: 'export'`) → Generates pure HTML/CSS/JS, deploys anywhere
+- **Serverless-ready** → Careers form uses an API route to email resume uploads via Resend
 - **React components** → Reusable, maintainable, modern DX
-- **Zero server required** → No Node.js server in production
-- **SEO-friendly** → Each page gets its own HTML file with proper metadata
+- **SEO-friendly** → Each page gets its own HTML with proper metadata
 
 ### Component Architecture
 - **`components/UI.jsx`** — All reusable UI primitives (Section, Hero, Card, Badge, etc.)
@@ -121,7 +119,7 @@ All content lives in `lib/data.js`. To update product details, pricing, blog pos
 
 ## Deployment
 
-### Vercel (Recommended — zero config)
+### Vercel (Recommended)
 ```bash
 # Install Vercel CLI
 npm i -g vercel
@@ -131,26 +129,11 @@ vercel
 
 # Add custom domain in Vercel dashboard
 # → ozlercaresolutions.com.au
-```
 
-### Netlify
-```bash
-npm run build
-# Upload /out directory to Netlify
-# Or connect GitHub repo → Build command: npm run build → Publish: out
-```
-
-### AWS S3 + CloudFront
-```bash
-npm run build
-aws s3 sync out/ s3://ozlercaresolutions.com.au
-# Configure CloudFront distribution + SSL certificate via ACM
-```
-
-### Any Static Host
-```bash
-npm run build
-# Upload contents of /out directory
+# Environment variables (required for careers form)
+# RESEND_API_KEY
+# FROM_EMAIL (verified sender in Resend)
+# HR_EMAIL (recipient inbox)
 ```
 
 ---

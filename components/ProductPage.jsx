@@ -13,8 +13,66 @@ export default function ProductPage({ productId }) {
   const product = getProduct(productId);
   if (!product) return null;
 
+  const productFaq = faq(product.name);
+
+  const softwareJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: product.name,
+    description: product.description,
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '0',
+      priceCurrency: 'AUD',
+      description: product.price,
+    },
+    provider: {
+      '@type': 'Organization',
+      name: 'Ozler Care Solutions',
+      url: 'https://ozlercaresolutions.com.au',
+    },
+    featureList: product.features.map(f => f.title).join(', '),
+  };
+
+  const faqJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: productFaq.map(item => ({
+      '@type': 'Question',
+      name: item.q,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.a,
+      },
+    })),
+  };
+
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://ozlercaresolutions.com.au' },
+      { '@type': 'ListItem', position: 2, name: 'Solutions', item: 'https://ozlercaresolutions.com.au/solutions' },
+      { '@type': 'ListItem', position: 3, name: product.name },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
       <PageHero
         dark
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'Solutions', href: '/solutions' }, { label: product.name }]}
@@ -52,7 +110,7 @@ export default function ProductPage({ productId }) {
       <Section gray>
         <div className="max-w-3xl mx-auto">
           <SectionHeader center label="Frequently Asked Questions" title={`Common questions about ${product.name}`} />
-          <Accordion items={faq(product.name)} />
+          <Accordion items={productFaq} />
         </div>
       </Section>
 
